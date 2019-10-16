@@ -1,4 +1,4 @@
-SRCS=$(wildcard *.c)
+SRCS=$(wildcard */*.c) $(wildcard *.c) 
 CC = zcc
 CFLAGS = +rc2014 -subtype=basic -v -m -SOfast --c-code-in-asm  -clib=sdcc_ix
 #  --max-allocs-per-node200000

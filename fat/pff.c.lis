@@ -1,0 +1,3245 @@
+1     0000              MODULE pff_c
+2     0000              LINE 0, "fat/pff.c"
+0     0000              
+1     0000              ;--------------------------------------------------------
+2     0000              ; File Created by SDCC : free open source ANSI-C Compiler
+3     0000              ; Version 3.9.1 #11310 (Linux)
+4     0000              ;--------------------------------------------------------
+5     0000              ; Processed by Z88DK
+6     0000              ;--------------------------------------------------------
+7     0000              
+8     0000              	EXTERN __divschar
+9     0000              	EXTERN __divschar_callee
+10    0000              	EXTERN __divsint
+11    0000              	EXTERN __divsint_callee
+12    0000              	EXTERN __divslong
+13    0000              	EXTERN __divslong_callee
+14    0000              	EXTERN __divslonglong
+15    0000              	EXTERN __divslonglong_callee
+16    0000              	EXTERN __divsuchar
+17    0000              	EXTERN __divsuchar_callee
+18    0000              	EXTERN __divuchar
+19    0000              	EXTERN __divuchar_callee
+20    0000              	EXTERN __divuint
+21    0000              	EXTERN __divuint_callee
+22    0000              	EXTERN __divulong
+23    0000              	EXTERN __divulong_callee
+24    0000              	EXTERN __divulonglong
+25    0000              	EXTERN __divulonglong_callee
+26    0000              	EXTERN __divuschar
+27    0000              	EXTERN __divuschar_callee
+28    0000              	EXTERN __modschar
+29    0000              	EXTERN __modschar_callee
+30    0000              	EXTERN __modsint
+31    0000              	EXTERN __modsint_callee
+32    0000              	EXTERN __modslong
+33    0000              	EXTERN __modslong_callee
+34    0000              	EXTERN __modslonglong
+35    0000              	EXTERN __modslonglong_callee
+36    0000              	EXTERN __modsuchar
+37    0000              	EXTERN __modsuchar_callee
+38    0000              	EXTERN __moduchar
+39    0000              	EXTERN __moduchar_callee
+40    0000              	EXTERN __moduint
+41    0000              	EXTERN __moduint_callee
+42    0000              	EXTERN __modulong
+43    0000              	EXTERN __modulong_callee
+44    0000              	EXTERN __modulonglong
+45    0000              	EXTERN __modulonglong_callee
+46    0000              	EXTERN __moduschar
+47    0000              	EXTERN __moduschar_callee
+48    0000              	EXTERN __mulint
+49    0000              	EXTERN __mulint_callee
+50    0000              	EXTERN __mullong
+51    0000              	EXTERN __mullong_callee
+52    0000              	EXTERN __mullonglong
+53    0000              	EXTERN __mullonglong_callee
+54    0000              	EXTERN __mulschar
+55    0000              	EXTERN __mulschar_callee
+56    0000              	EXTERN __mulsuchar
+57    0000              	EXTERN __mulsuchar_callee
+58    0000              	EXTERN __muluschar
+59    0000              	EXTERN __muluschar_callee
+60    0000              	EXTERN __rlslonglong
+61    0000              	EXTERN __rlslonglong_callee
+62    0000              	EXTERN __rlulonglong
+63    0000              	EXTERN __rlulonglong_callee
+64    0000              	EXTERN __rrslonglong
+65    0000              	EXTERN __rrslonglong_callee
+66    0000              	EXTERN __rrulonglong
+67    0000              	EXTERN __rrulonglong_callee
+68    0000              	EXTERN ___sdcc_call_hl
+69    0000              	EXTERN ___sdcc_call_iy
+70    0000              	EXTERN ___sdcc_enter_ix
+71    0000              	EXTERN _banked_call
+72    0000              	EXTERN _banked_ret
+73    0000              	EXTERN ___fs2schar
+74    0000              	EXTERN ___fs2schar_callee
+75    0000              	EXTERN ___fs2sint
+76    0000              	EXTERN ___fs2sint_callee
+77    0000              	EXTERN ___fs2slong
+78    0000              	EXTERN ___fs2slong_callee
+79    0000              	EXTERN ___fs2slonglong
+80    0000              	EXTERN ___fs2slonglong_callee
+81    0000              	EXTERN ___fs2uchar
+82    0000              	EXTERN ___fs2uchar_callee
+83    0000              	EXTERN ___fs2uint
+84    0000              	EXTERN ___fs2uint_callee
+85    0000              	EXTERN ___fs2ulong
+86    0000              	EXTERN ___fs2ulong_callee
+87    0000              	EXTERN ___fs2ulonglong
+88    0000              	EXTERN ___fs2ulonglong_callee
+89    0000              	EXTERN ___fsadd
+90    0000              	EXTERN ___fsadd_callee
+91    0000              	EXTERN ___fsdiv
+92    0000              	EXTERN ___fsdiv_callee
+93    0000              	EXTERN ___fseq
+94    0000              	EXTERN ___fseq_callee
+95    0000              	EXTERN ___fsgt
+96    0000              	EXTERN ___fsgt_callee
+97    0000              	EXTERN ___fslt
+98    0000              	EXTERN ___fslt_callee
+99    0000              	EXTERN ___fsmul
+100   0000              	EXTERN ___fsmul_callee
+101   0000              	EXTERN ___fsneq
+102   0000              	EXTERN ___fsneq_callee
+103   0000              	EXTERN ___fssub
+104   0000              	EXTERN ___fssub_callee
+105   0000              	EXTERN ___schar2fs
+106   0000              	EXTERN ___schar2fs_callee
+107   0000              	EXTERN ___sint2fs
+108   0000              	EXTERN ___sint2fs_callee
+109   0000              	EXTERN ___slong2fs
+110   0000              	EXTERN ___slong2fs_callee
+111   0000              	EXTERN ___slonglong2fs
+112   0000              	EXTERN ___slonglong2fs_callee
+113   0000              	EXTERN ___uchar2fs
+114   0000              	EXTERN ___uchar2fs_callee
+115   0000              	EXTERN ___uint2fs
+116   0000              	EXTERN ___uint2fs_callee
+117   0000              	EXTERN ___ulong2fs
+118   0000              	EXTERN ___ulong2fs_callee
+119   0000              	EXTERN ___ulonglong2fs
+120   0000              	EXTERN ___ulonglong2fs_callee
+121   0000              	EXTERN ____sdcc_2_copy_src_mhl_dst_deix
+122   0000              	EXTERN ____sdcc_2_copy_src_mhl_dst_bcix
+123   0000              	EXTERN ____sdcc_4_copy_src_mhl_dst_deix
+124   0000              	EXTERN ____sdcc_4_copy_src_mhl_dst_bcix
+125   0000              	EXTERN ____sdcc_4_copy_src_mhl_dst_mbc
+126   0000              	EXTERN ____sdcc_4_ldi_nosave_bc
+127   0000              	EXTERN ____sdcc_4_ldi_save_bc
+128   0000              	EXTERN ____sdcc_4_push_hlix
+129   0000              	EXTERN ____sdcc_4_push_mhl
+130   0000              	EXTERN ____sdcc_lib_setmem_hl
+131   0000              	EXTERN ____sdcc_ll_add_de_bc_hl
+132   0000              	EXTERN ____sdcc_ll_add_de_bc_hlix
+133   0000              	EXTERN ____sdcc_ll_add_de_hlix_bc
+134   0000              	EXTERN ____sdcc_ll_add_de_hlix_bcix
+135   0000              	EXTERN ____sdcc_ll_add_deix_bc_hl
+136   0000              	EXTERN ____sdcc_ll_add_deix_hlix
+137   0000              	EXTERN ____sdcc_ll_add_hlix_bc_deix
+138   0000              	EXTERN ____sdcc_ll_add_hlix_deix_bc
+139   0000              	EXTERN ____sdcc_ll_add_hlix_deix_bcix
+140   0000              	EXTERN ____sdcc_ll_asr_hlix_a
+141   0000              	EXTERN ____sdcc_ll_asr_mbc_a
+142   0000              	EXTERN ____sdcc_ll_copy_src_de_dst_hlix
+143   0000              	EXTERN ____sdcc_ll_copy_src_de_dst_hlsp
+144   0000              	EXTERN ____sdcc_ll_copy_src_deix_dst_hl
+145   0000              	EXTERN ____sdcc_ll_copy_src_deix_dst_hlix
+146   0000              	EXTERN ____sdcc_ll_copy_src_deixm_dst_hlsp
+147   0000              	EXTERN ____sdcc_ll_copy_src_desp_dst_hlsp
+148   0000              	EXTERN ____sdcc_ll_copy_src_hl_dst_de
+149   0000              	EXTERN ____sdcc_ll_copy_src_hlsp_dst_de
+150   0000              	EXTERN ____sdcc_ll_copy_src_hlsp_dst_deixm
+151   0000              	EXTERN ____sdcc_ll_lsl_hlix_a
+152   0000              	EXTERN ____sdcc_ll_lsl_mbc_a
+153   0000              	EXTERN ____sdcc_ll_lsr_hlix_a
+154   0000              	EXTERN ____sdcc_ll_lsr_mbc_a
+155   0000              	EXTERN ____sdcc_ll_push_hlix
+156   0000              	EXTERN ____sdcc_ll_push_mhl
+157   0000              	EXTERN ____sdcc_ll_sub_de_bc_hl
+158   0000              	EXTERN ____sdcc_ll_sub_de_bc_hlix
+159   0000              	EXTERN ____sdcc_ll_sub_de_hlix_bc
+160   0000              	EXTERN ____sdcc_ll_sub_de_hlix_bcix
+161   0000              	EXTERN ____sdcc_ll_sub_deix_bc_hl
+162   0000              	EXTERN ____sdcc_ll_sub_deix_hlix
+163   0000              	EXTERN ____sdcc_ll_sub_hlix_bc_deix
+164   0000              	EXTERN ____sdcc_ll_sub_hlix_deix_bc
+165   0000              	EXTERN ____sdcc_ll_sub_hlix_deix_bcix
+166   0000              	EXTERN ____sdcc_load_debc_deix
+167   0000              	EXTERN ____sdcc_load_dehl_deix
+168   0000              	EXTERN ____sdcc_load_debc_mhl
+169   0000              	EXTERN ____sdcc_load_hlde_mhl
+170   0000              	EXTERN ____sdcc_store_dehl_bcix
+171   0000              	EXTERN ____sdcc_store_debc_hlix
+172   0000              	EXTERN ____sdcc_store_debc_mhl
+173   0000              	EXTERN ____sdcc_cpu_pop_ei
+174   0000              	EXTERN ____sdcc_cpu_pop_ei_jp
+175   0000              	EXTERN ____sdcc_cpu_push_di
+176   0000              	EXTERN ____sdcc_outi
+177   0000              	EXTERN ____sdcc_outi_128
+178   0000              	EXTERN ____sdcc_outi_256
+179   0000              	EXTERN ____sdcc_ldi
+180   0000              	EXTERN ____sdcc_ldi_128
+181   0000              	EXTERN ____sdcc_ldi_256
+182   0000              	EXTERN ____sdcc_4_copy_srcd_hlix_dst_deix
+183   0000              	EXTERN ____sdcc_4_and_src_mbc_mhl_dst_deix
+184   0000              	EXTERN ____sdcc_4_or_src_mbc_mhl_dst_deix
+185   0000              	EXTERN ____sdcc_4_xor_src_mbc_mhl_dst_deix
+186   0000              	EXTERN ____sdcc_4_or_src_dehl_dst_bcix
+187   0000              	EXTERN ____sdcc_4_xor_src_dehl_dst_bcix
+188   0000              	EXTERN ____sdcc_4_and_src_dehl_dst_bcix
+189   0000              	EXTERN ____sdcc_4_xor_src_mbc_mhl_dst_debc
+190   0000              	EXTERN ____sdcc_4_or_src_mbc_mhl_dst_debc
+191   0000              	EXTERN ____sdcc_4_and_src_mbc_mhl_dst_debc
+192   0000              	EXTERN ____sdcc_4_cpl_src_mhl_dst_debc
+193   0000              	EXTERN ____sdcc_4_xor_src_debc_mhl_dst_debc
+194   0000              	EXTERN ____sdcc_4_or_src_debc_mhl_dst_debc
+195   0000              	EXTERN ____sdcc_4_and_src_debc_mhl_dst_debc
+196   0000              	EXTERN ____sdcc_4_and_src_debc_hlix_dst_debc
+197   0000              	EXTERN ____sdcc_4_or_src_debc_hlix_dst_debc
+198   0000              	EXTERN ____sdcc_4_xor_src_debc_hlix_dst_debc
+199   0000              
+200   0000              ;--------------------------------------------------------
+201   0000              ; Public variables in this module
+202   0000              ;--------------------------------------------------------
+203   0000              	GLOBAL _pf_mount
+204   0000              	GLOBAL _pf_open
+205   0000              	GLOBAL _pf_read
+206   0000              	GLOBAL _pf_write
+207   0000              ;--------------------------------------------------------
+208   0000              ; Externals used
+209   0000              ;--------------------------------------------------------
+210   0000              	GLOBAL _disk_writep
+211   0000              	GLOBAL _disk_readp
+212   0000              	GLOBAL _disk_initialize
+213   0000              	GLOBAL _pf_readdir
+214   0000              	GLOBAL _pf_opendir
+215   0000              	GLOBAL _pf_lseek
+216   0000              ;--------------------------------------------------------
+217   0000              ; special function registers
+218   0000              ;--------------------------------------------------------
+219   0000              ;--------------------------------------------------------
+220   0000              ; ram data
+221   0000              ;--------------------------------------------------------
+222   0000              	SECTION bss_compiler
+223   0000              _FatFs:
+224   0000  00 00       	DEFS 2
+225   0002              ;--------------------------------------------------------
+226   0002              ; ram data
+227   0002              ;--------------------------------------------------------
+228   0002              
+229   0002              IF 0
+230   0002              
+231   0002              ; .area _INITIALIZED removed by z88dk
+232   0002              
+233   0002              
+234   0002              ENDIF
+235   0002              
+236   0002              ;--------------------------------------------------------
+237   0002              ; absolute external ram data
+238   0002              ;--------------------------------------------------------
+239   0002              	SECTION IGNORE
+240   0000              ;--------------------------------------------------------
+241   0000              ; global & static initialisations
+242   0000              ;--------------------------------------------------------
+243   0000              	SECTION code_crt_init
+244   0000              ;--------------------------------------------------------
+245   0000              ; Home
+246   0000              ;--------------------------------------------------------
+247   0000              	SECTION IGNORE
+248   0000              ;--------------------------------------------------------
+249   0000              ; code
+250   0000              ;--------------------------------------------------------
+251   0000              	SECTION code_compiler
+252   0000              ;fat/pff.c:384: static WORD ld_word (const BYTE* ptr)	/*	 Load a 2-byte little-endian word */
+253   0000              ;	---------------------------------
+254   0000              ; Function ld_word
+255   0000              ; ---------------------------------
+256   0000              _ld_word:
+257   0000  DD E5       	push	ix
+258   0002  DD 21 00 00 	ld	ix,0
+259   0006  DD 39       	add	ix,sp
+260   0008              ;fat/pff.c:388: rv = ptr[1];
+261   0008  DD 6E 04    	ld	l,(ix+4)
+262   000B  DD 66 05    	ld	h,(ix+5)
+263   000E  23          	inc	hl
+264   000F              ;fat/pff.c:389: rv = rv << 8 | ptr[0];
+265   000F  46          	ld	b, (hl)
+266   0010  0E 00       	ld	c,0x00
+267   0012  DD 6E 04    	ld	l,(ix+4)
+268   0015  DD 66 05    	ld	h,(ix+5)
+269   0018  5E          	ld	e, (hl)
+270   0019  16 00       	ld	d,0x00
+271   001B  79          	ld	a, c
+272   001C  B3          	or	a, e
+273   001D  6F          	ld	l, a
+274   001E  78          	ld	a, b
+275   001F  B2          	or	a, d
+276   0020  67          	ld	h, a
+277   0021              ;fat/pff.c:390: return rv;
+278   0021              ;fat/pff.c:391: }
+279   0021  DD E1       	pop	ix
+280   0023  C9          	ret
+281   0024              	SECTION code_compiler
+282   0024              ;fat/pff.c:393: static DWORD ld_dword (const BYTE* ptr)	/* Load a 4-byte little-endian word */
+283   0024              ;	---------------------------------
+284   0024              ; Function ld_dword
+285   0024              ; ---------------------------------
+286   0024              _ld_dword:
+287   0024  DD E5       	push	ix
+288   0026  DD 21 00 00 	ld	ix,0
+289   002A  DD 39       	add	ix,sp
+290   002C  F5          	push	af
+291   002D  F5          	push	af
+292   002E              ;fat/pff.c:397: rv = ptr[3];
+293   002E  DD 6E 04    	ld	l,(ix+4)
+294   0031  DD 66 05    	ld	h,(ix+5)
+295   0034  23          	inc	hl
+296   0035  23          	inc	hl
+297   0036  23          	inc	hl
+298   0037  4E          	ld	c, (hl)
+299   0038  06 00       	ld	b,0x00
+300   003A  1E 00       	ld	e,0x00
+301   003C              ;fat/pff.c:398: rv = rv << 8 | ptr[2];
+302   003C  DD 71 FD    	ld	(ix-3),c
+303   003F  DD 70 FE    	ld	(ix-2),b
+304   0042  DD 73 FF    	ld	(ix-1),e
+305   0045  DD 36 FC 00 	ld	(ix-4),0x00
+306   0049  DD 6E 04    	ld	l,(ix+4)
+307   004C  DD 66 05    	ld	h,(ix+5)
+308   004F  23          	inc	hl
+309   0050  23          	inc	hl
+310   0051  4E          	ld	c, (hl)
+311   0052  06 00       	ld	b,0x00
+312   0054  2E 00       	ld	l,0x00
+313   0056  26 00       	ld	h,0x00
+314   0058  DD 7E FC    	ld	a,(ix-4)
+315   005B  B1          	or	a, c
+316   005C  5F          	ld	e, a
+317   005D  DD 7E FD    	ld	a,(ix-3)
+318   0060  B0          	or	a, b
+319   0061  57          	ld	d, a
+320   0062  DD 7E FE    	ld	a,(ix-2)
+321   0065  B5          	or	a, l
+322   0066  6F          	ld	l, a
+323   0067  DD 7E FF    	ld	a,(ix-1)
+324   006A  B4          	or	a, h
+325   006B              ;fat/pff.c:399: rv = rv << 8 | ptr[1];
+326   006B  43          	ld	b, e
+327   006C  5A          	ld	e, d
+328   006D  55          	ld	d, l
+329   006E  0E 00       	ld	c,0x00
+330   0070  DD 6E 04    	ld	l,(ix+4)
+331   0073  DD 66 05    	ld	h,(ix+5)
+332   0076  23          	inc	hl
+333   0077  7E          	ld	a, (hl)
+334   0078  DD 77 FC    	ld	(ix-4),a
+335   007B  DD 36 FD 00 	ld	(ix-3),0x00
+336   007F  DD 36 FE 00 	ld	(ix-2),0x00
+337   0083  DD 36 FF 00 	ld	(ix-1),0x00
+338   0087  79          	ld	a, c
+339   0088  DD B6 FC    	or	a,(ix-4)
+340   008B  4F          	ld	c, a
+341   008C  78          	ld	a, b
+342   008D  DD B6 FD    	or	a,(ix-3)
+343   0090  47          	ld	b, a
+344   0091  7B          	ld	a, e
+345   0092  DD B6 FE    	or	a,(ix-2)
+346   0095  5F          	ld	e, a
+347   0096  7A          	ld	a, d
+348   0097  DD B6 FF    	or	a,(ix-1)
+349   009A              ;fat/pff.c:400: rv = rv << 8 | ptr[0];
+350   009A  DD 71 FD    	ld	(ix-3),c
+351   009D  DD 70 FE    	ld	(ix-2),b
+352   00A0  DD 73 FF    	ld	(ix-1),e
+353   00A3  DD 36 FC 00 	ld	(ix-4),0x00
+354   00A7  DD 6E 04    	ld	l,(ix+4)
+355   00AA  DD 66 05    	ld	h,(ix+5)
+356   00AD  4E          	ld	c, (hl)
+357   00AE  06 00       	ld	b,0x00
+358   00B0  1E 00       	ld	e,0x00
+359   00B2  16 00       	ld	d,0x00
+360   00B4  DD 7E FC    	ld	a,(ix-4)
+361   00B7  B1          	or	a, c
+362   00B8  6F          	ld	l, a
+363   00B9  DD 7E FD    	ld	a,(ix-3)
+364   00BC  B0          	or	a, b
+365   00BD  67          	ld	h, a
+366   00BE  DD 7E FE    	ld	a,(ix-2)
+367   00C1  B3          	or	a, e
+368   00C2  5F          	ld	e, a
+369   00C3  DD 7E FF    	ld	a,(ix-1)
+370   00C6  B2          	or	a, d
+371   00C7  57          	ld	d, a
+372   00C8              ;fat/pff.c:401: return rv;
+373   00C8              ;fat/pff.c:402: }
+374   00C8  DD F9       	ld	sp, ix
+375   00CA  DD E1       	pop	ix
+376   00CC  C9          	ret
+377   00CD              	SECTION code_compiler
+378   00CD              ;fat/pff.c:411: static void mem_set (void* dst, int val, int cnt) {
+379   00CD              ;	---------------------------------
+380   00CD              ; Function mem_set
+381   00CD              ; ---------------------------------
+382   00CD              _mem_set:
+383   00CD  DD E5       	push	ix
+384   00CF  DD 21 00 00 	ld	ix,0
+385   00D3  DD 39       	add	ix,sp
+386   00D5              ;fat/pff.c:412: char *d = (char*)dst;
+387   00D5  DD 5E 04    	ld	e,(ix+4)
+388   00D8  DD 56 05    	ld	d,(ix+5)
+389   00DB              ;fat/pff.c:413: while (cnt--) *d++ = (char)val;
+390   00DB  DD 4E 08    	ld	c,(ix+8)
+391   00DE  DD 46 09    	ld	b,(ix+9)
+392   00E1              l_mem_set_00101:
+393   00E1  69          	ld	l, c
+394   00E2  60          	ld	h, b
+395   00E3  0B          	dec	bc
+396   00E4  7C          	ld	a, h
+397   00E5  B5          	or	a, l
+398   00E6  28 07       	jr	Z,l_mem_set_00104
+399   00E8  DD 7E 06    	ld	a,(ix+6)
+400   00EB  12          	ld	(de), a
+401   00EC  13          	inc	de
+402   00ED  18 F2       	jr	l_mem_set_00101
+403   00EF              l_mem_set_00104:
+404   00EF              ;fat/pff.c:414: }
+405   00EF  DD E1       	pop	ix
+406   00F1  C9          	ret
+407   00F2              	SECTION code_compiler
+408   00F2              ;fat/pff.c:417: static int mem_cmp (const void* dst, const void* src, int cnt) {
+409   00F2              ;	---------------------------------
+410   00F2              ; Function mem_cmp
+411   00F2              ; ---------------------------------
+412   00F2              _mem_cmp:
+413   00F2  DD E5       	push	ix
+414   00F4  DD 21 00 00 	ld	ix,0
+415   00F8  DD 39       	add	ix,sp
+416   00FA  F5          	push	af
+417   00FB  F5          	push	af
+418   00FC              ;fat/pff.c:418: const char *d = (const char *)dst, *s = (const char *)src;
+419   00FC  DD 7E 04    	ld	a,(ix+4)
+420   00FF  DD 77 FC    	ld	(ix-4),a
+421   0102  DD 7E 05    	ld	a,(ix+5)
+422   0105  DD 77 FD    	ld	(ix-3),a
+423   0108  DD 7E 06    	ld	a,(ix+6)
+424   010B  DD 77 FE    	ld	(ix-2),a
+425   010E  DD 7E 07    	ld	a,(ix+7)
+426   0111  DD 77 FF    	ld	(ix-1),a
+427   0114              ;fat/pff.c:419: int r = 0;
+428   0114  21 00 00    	ld	hl,0x0000
+429   0117              ;fat/pff.c:420: while (cnt-- && (r = *d++ - *s++) == 0) ;
+430   0117  DD 4E 08    	ld	c,(ix+8)
+431   011A  DD 46 09    	ld	b,(ix+9)
+432   011D              l_mem_cmp_00102:
+433   011D  59          	ld	e, c
+434   011E  50          	ld	d, b
+435   011F  0B          	dec	bc
+436   0120  7A          	ld	a, d
+437   0121  B3          	or	a, e
+438   0122  28 2A       	jr	Z,l_mem_cmp_00104
+439   0124  E1          	pop	hl
+440   0125  E5          	push	hl
+441   0126  5E          	ld	e, (hl)
+442   0127  DD 34 FC    	inc	(ix-4)
+443   012A  20 03       	jr	NZ,l_mem_cmp_00118
+444   012C  DD 34 FD    	inc	(ix-3)
+445   012F              l_mem_cmp_00118:
+446   012F  16 00       	ld	d,0x00
+447   0131  DD 6E FE    	ld	l,(ix-2)
+448   0134  DD 66 FF    	ld	h,(ix-1)
+449   0137  6E          	ld	l, (hl)
+450   0138  DD 34 FE    	inc	(ix-2)
+451   013B  20 03       	jr	NZ,l_mem_cmp_00119
+452   013D  DD 34 FF    	inc	(ix-1)
+453   0140              l_mem_cmp_00119:
+454   0140  26 00       	ld	h,0x00
+455   0142  7B          	ld	a, e
+456   0143  95          	sub	a, l
+457   0144  5F          	ld	e, a
+458   0145  7A          	ld	a, d
+459   0146  9C          	sbc	a, h
+460   0147  57          	ld	d, a
+461   0148  6B          	ld	l, e
+462   0149  7A          	ld	a,d
+463   014A  67          	ld	h,a
+464   014B  B3          	or	a, e
+465   014C  28 CF       	jr	Z,l_mem_cmp_00102
+466   014E              l_mem_cmp_00104:
+467   014E              ;fat/pff.c:421: return r;
+468   014E              ;fat/pff.c:422: }
+469   014E  DD F9       	ld	sp, ix
+470   0150  DD E1       	pop	ix
+471   0152  C9          	ret
+472   0153              	SECTION code_compiler
+473   0153              ;fat/pff.c:430: static CLUST get_fat (	/* 1:IO error, Else:Cluster status */
+474   0153              ;	---------------------------------
+475   0153              ; Function get_fat
+476   0153              ; ---------------------------------
+477   0153              _get_fat:
+478   0153  DD E5       	push	ix
+479   0155  DD 21 00 00 	ld	ix,0
+480   0159  DD 39       	add	ix,sp
+481   015B  21 F2 FF    	ld	hl, -14
+482   015E  39          	add	hl, sp
+483   015F  F9          	ld	sp, hl
+484   0160              ;fat/pff.c:435: FATFS *fs = FatFs;
+485   0160  ED 4B 00 00 	ld	bc, (_FatFs)
+486   0164              ;fat/pff.c:440: if (clst < 2 || clst >= fs->n_fatent) return 1;	/* Range check */
+487   0164  DD 7E 04    	ld	a,(ix+4)
+488   0167  D6 02       	sub	a,0x02
+489   0169  DD 7E 05    	ld	a,(ix+5)
+490   016C  DE 00       	sbc	a,0x00
+491   016E  38 13       	jr	C,l_get_fat_00101
+492   0170  69          	ld	l, c
+493   0171  60          	ld	h, b
+494   0172  11 06 00    	ld	de,0x0006
+495   0175  19          	add	hl, de
+496   0176  5E          	ld	e, (hl)
+497   0177  23          	inc	hl
+498   0178  56          	ld	d, (hl)
+499   0179  DD 7E 04    	ld	a,(ix+4)
+500   017C  93          	sub	a, e
+501   017D  DD 7E 05    	ld	a,(ix+5)
+502   0180  9A          	sbc	a, d
+503   0181  38 06       	jr	C,l_get_fat_00102
+504   0183              l_get_fat_00101:
+505   0183  21 01 00    	ld	hl,0x0001
+506   0186  C3 12 02    	jp	l_get_fat_00108
+507   0189              l_get_fat_00102:
+508   0189              ;fat/pff.c:442: switch (fs->fs_type) {
+509   0189  0A          	ld	a, (bc)
+510   018A  D6 02       	sub	a,0x02
+511   018C  C2 0F 02    	jp	NZ,l_get_fat_00107
+512   018F              ;fat/pff.c:459: if (disk_readp(buf, fs->fatbase + clst / 256, ((UINT)clst % 256) * 2, 2)) break;
+513   018F  DD 6E 04    	ld	l,(ix+4)
+514   0192  26 00       	ld	h,0x00
+515   0194  29          	add	hl, hl
+516   0195  DD 75 F6    	ld	(ix-10),l
+517   0198  DD 74 F7    	ld	(ix-9),h
+518   019B  69          	ld	l, c
+519   019C  60          	ld	h, b
+520   019D  11 08 00    	ld	de,0x0008
+521   01A0  19          	add	hl, de
+522   01A1  4E          	ld	c, (hl)
+523   01A2  23          	inc	hl
+524   01A3  46          	ld	b, (hl)
+525   01A4  23          	inc	hl
+526   01A5  5E          	ld	e, (hl)
+527   01A6  23          	inc	hl
+528   01A7  56          	ld	d, (hl)
+529   01A8  DD 6E 05    	ld	l,(ix+5)
+530   01AB  DD 75 F8    	ld	(ix-8),l
+531   01AE  DD 36 F9 00 	ld	(ix-7),0x00
+532   01B2  DD 36 FA 00 	ld	(ix-6),0x00
+533   01B6  DD 36 FB 00 	ld	(ix-5),0x00
+534   01BA  79          	ld	a, c
+535   01BB  DD 86 F8    	add	a,(ix-8)
+536   01BE  DD 77 FC    	ld	(ix-4),a
+537   01C1  78          	ld	a, b
+538   01C2  DD 8E F9    	adc	a,(ix-7)
+539   01C5  DD 77 FD    	ld	(ix-3),a
+540   01C8  7B          	ld	a, e
+541   01C9  DD 8E FA    	adc	a,(ix-6)
+542   01CC  DD 77 FE    	ld	(ix-2),a
+543   01CF  7A          	ld	a, d
+544   01D0  DD 8E FB    	adc	a,(ix-5)
+545   01D3  DD 77 FF    	ld	(ix-1),a
+546   01D6  21 00 00    	ld	hl,0
+547   01D9  39          	add	hl, sp
+548   01DA  EB          	ex	de, hl
+549   01DB  4B          	ld	c, e
+550   01DC  42          	ld	b, d
+551   01DD  D5          	push	de
+552   01DE  21 02 00    	ld	hl,0x0002
+553   01E1  E5          	push	hl
+554   01E2  DD 6E F6    	ld	l,(ix-10)
+555   01E5  DD 66 F7    	ld	h,(ix-9)
+556   01E8  E5          	push	hl
+557   01E9  DD 6E FE    	ld	l,(ix-2)
+558   01EC  DD 66 FF    	ld	h,(ix-1)
+559   01EF  E5          	push	hl
+560   01F0  DD 6E FC    	ld	l,(ix-4)
+561   01F3  DD 66 FD    	ld	h,(ix-3)
+562   01F6  E5          	push	hl
+563   01F7  C5          	push	bc
+564   01F8  CD 00 00    	call	_disk_readp
+565   01FB  FD 21 0A 00 	ld	iy,10
+566   01FF  FD 39       	add	iy, sp
+567   0201  FD F9       	ld	sp, iy
+568   0203  7D          	ld	a, l
+569   0204  D1          	pop	de
+570   0205  B7          	or	a, a
+571   0206  20 07       	jr	NZ,l_get_fat_00107
+572   0208              ;fat/pff.c:460: return ld_word(buf);
+573   0208  D5          	push	de
+574   0209  CD 00 00    	call	_ld_word
+575   020C  F1          	pop	af
+576   020D  18 03       	jr	l_get_fat_00108
+577   020F              ;fat/pff.c:467: }
+578   020F              l_get_fat_00107:
+579   020F              ;fat/pff.c:469: return 1;	/* An error occured at the disk I/O layer */
+580   020F  21 01 00    	ld	hl,0x0001
+581   0212              l_get_fat_00108:
+582   0212              ;fat/pff.c:470: }
+583   0212  DD F9       	ld	sp, ix
+584   0214  DD E1       	pop	ix
+585   0216  C9          	ret
+586   0217              	SECTION code_compiler
+587   0217              ;fat/pff.c:479: static DWORD clust2sect (	/* !=0: Sector number, 0: Failed - invalid cluster# */
+588   0217              ;	---------------------------------
+589   0217              ; Function clust2sect
+590   0217              ; ---------------------------------
+591   0217              _clust2sect:
+592   0217  DD E5       	push	ix
+593   0219  DD 21 00 00 	ld	ix,0
+594   021D  DD 39       	add	ix,sp
+595   021F  F5          	push	af
+596   0220  F5          	push	af
+597   0221              ;fat/pff.c:483: FATFS *fs = FatFs;
+598   0221  ED 4B 00 00 	ld	bc, (_FatFs)
+599   0225              ;fat/pff.c:486: clst -= 2;
+600   0225  DD 6E 04    	ld	l,(ix+4)
+601   0228  DD 66 05    	ld	h,(ix+5)
+602   022B  2B          	dec	hl
+603   022C  2B          	dec	hl
+604   022D  DD 75 04    	ld	(ix+4),l
+605   0230  DD 74 05    	ld	(ix+5),h
+606   0233              ;fat/pff.c:487: if (clst >= (fs->n_fatent - 2)) return 0;		/* Invalid cluster# */
+607   0233  69          	ld	l, c
+608   0234  60          	ld	h, b
+609   0235  11 06 00    	ld	de,0x0006
+610   0238  19          	add	hl, de
+611   0239  5E          	ld	e, (hl)
+612   023A  23          	inc	hl
+613   023B  56          	ld	d, (hl)
+614   023C  1B          	dec	de
+615   023D  1B          	dec	de
+616   023E  DD 7E 04    	ld	a,(ix+4)
+617   0241  93          	sub	a, e
+618   0242  DD 7E 05    	ld	a,(ix+5)
+619   0245  9A          	sbc	a, d
+620   0246  38 0A       	jr	C,l_clust2sect_00102
+621   0248  2E 00       	ld	l,0x00
+622   024A  26 00       	ld	h,0x00
+623   024C  1E 00       	ld	e,0x00
+624   024E  16 00       	ld	d,0x00
+625   0250  18 5F       	jr	l_clust2sect_00103
+626   0252              l_clust2sect_00102:
+627   0252              ;fat/pff.c:488: return (DWORD)clst * fs->csize + fs->database;
+628   0252  DD 7E 04    	ld	a,(ix+4)
+629   0255  DD 77 FC    	ld	(ix-4),a
+630   0258  DD 7E 05    	ld	a,(ix+5)
+631   025B  DD 77 FD    	ld	(ix-3),a
+632   025E  DD 36 FE 00 	ld	(ix-2),0x00
+633   0262  DD 36 FF 00 	ld	(ix-1),0x00
+634   0266  69          	ld	l, c
+635   0267  60          	ld	h, b
+636   0268  23          	inc	hl
+637   0269  23          	inc	hl
+638   026A  5E          	ld	e, (hl)
+639   026B  16 00       	ld	d,0x00
+640   026D  2E 00       	ld	l,0x00
+641   026F  26 00       	ld	h,0x00
+642   0271  C5          	push	bc
+643   0272  E5          	push	hl
+644   0273  D5          	push	de
+645   0274  DD 6E FE    	ld	l,(ix-2)
+646   0277  DD 66 FF    	ld	h,(ix-1)
+647   027A  E5          	push	hl
+648   027B  DD 6E FC    	ld	l,(ix-4)
+649   027E  DD 66 FD    	ld	h,(ix-3)
+650   0281  E5          	push	hl
+651   0282  CD 00 00    	call	__mullong_callee
+652   0285  DD 75 FC    	ld	(ix-4),l
+653   0288  DD 74 FD    	ld	(ix-3),h
+654   028B  DD 73 FE    	ld	(ix-2),e
+655   028E  DD 72 FF    	ld	(ix-1),d
+656   0291  E1          	pop	hl
+657   0292  11 10 00    	ld	de,0x0010
+658   0295  19          	add	hl, de
+659   0296  4E          	ld	c, (hl)
+660   0297  23          	inc	hl
+661   0298  46          	ld	b, (hl)
+662   0299  23          	inc	hl
+663   029A  5E          	ld	e, (hl)
+664   029B  23          	inc	hl
+665   029C  56          	ld	d, (hl)
+666   029D  DD 7E FC    	ld	a,(ix-4)
+667   02A0  81          	add	a, c
+668   02A1  6F          	ld	l, a
+669   02A2  DD 7E FD    	ld	a,(ix-3)
+670   02A5  88          	adc	a, b
+671   02A6  67          	ld	h, a
+672   02A7  DD 7E FE    	ld	a,(ix-2)
+673   02AA  8B          	adc	a, e
+674   02AB  5F          	ld	e, a
+675   02AC  DD 7E FF    	ld	a,(ix-1)
+676   02AF  8A          	adc	a, d
+677   02B0  57          	ld	d, a
+678   02B1              l_clust2sect_00103:
+679   02B1              ;fat/pff.c:489: }
+680   02B1  DD F9       	ld	sp, ix
+681   02B3  DD E1       	pop	ix
+682   02B5  C9          	ret
+683   02B6              	SECTION code_compiler
+684   02B6              ;fat/pff.c:492: static CLUST get_clust (
+685   02B6              ;	---------------------------------
+686   02B6              ; Function get_clust
+687   02B6              ; ---------------------------------
+688   02B6              _get_clust:
+689   02B6              ;fat/pff.c:504: clst |= ld_word(dir+DIR_FstClusLO);
+690   02B6  FD 21 02 00 	ld	iy,2
+691   02BA  FD 39       	add	iy, sp
+692   02BC  FD 7E 00    	ld	a,(iy+0)
+693   02BF  C6 1A       	add	a,0x1a
+694   02C1  4F          	ld	c, a
+695   02C2  FD 7E 01    	ld	a,(iy+1)
+696   02C5  CE 00       	adc	a,0x00
+697   02C7  47          	ld	b, a
+698   02C8  C5          	push	bc
+699   02C9  CD 00 00    	call	_ld_word
+700   02CC  F1          	pop	af
+701   02CD              ;fat/pff.c:506: return clst;
+702   02CD              ;fat/pff.c:507: }
+703   02CD  C9          	ret
+704   02CE              	SECTION code_compiler
+705   02CE              ;fat/pff.c:514: static FRESULT dir_rewind (
+706   02CE              ;	---------------------------------
+707   02CE              ; Function dir_rewind
+708   02CE              ; ---------------------------------
+709   02CE              _dir_rewind:
+710   02CE  DD E5       	push	ix
+711   02D0  DD 21 00 00 	ld	ix,0
+712   02D4  DD 39       	add	ix,sp
+713   02D6  F5          	push	af
+714   02D7  F5          	push	af
+715   02D8              ;fat/pff.c:519: FATFS *fs = FatFs;
+716   02D8  ED 4B 00 00 	ld	bc, (_FatFs)
+717   02DC              ;fat/pff.c:522: dj->index = 0;
+718   02DC  DD 7E 04    	ld	a,(ix+4)
+719   02DF  DD 77 FC    	ld	(ix-4),a
+720   02E2  DD 7E 05    	ld	a,(ix+5)
+721   02E5  DD 77 FD    	ld	(ix-3),a
+722   02E8  E1          	pop	hl
+723   02E9  E5          	push	hl
+724   02EA  36 00       	ld	(hl),0x00
+725   02EC  23          	inc	hl
+726   02ED  36 00       	ld	(hl),0x00
+727   02EF              ;fat/pff.c:523: clst = dj->sclust;
+728   02EF  E1          	pop	hl
+729   02F0  E5          	push	hl
+730   02F1  11 04 00    	ld	de,0x0004
+731   02F4  19          	add	hl, de
+732   02F5  5E          	ld	e, (hl)
+733   02F6  23          	inc	hl
+734   02F7  56          	ld	d, (hl)
+735   02F8              ;fat/pff.c:524: if (clst == 1 || clst >= fs->n_fatent) {	/* Check start cluster range */
+736   02F8  7B          	ld	a, e
+737   02F9  3D          	dec	a
+738   02FA  B2          	or	a, d
+739   02FB  28 12       	jr	Z,l_dir_rewind_00101
+740   02FD  69          	ld	l, c
+741   02FE  60          	ld	h, b
+742   02FF  C5          	push	bc
+743   0300  01 06 00    	ld	bc,0x0006
+744   0303  09          	add	hl, bc
+745   0304  C1          	pop	bc
+746   0305  7E          	ld	a, (hl)
+747   0306  23          	inc	hl
+748   0307  66          	ld	h, (hl)
+749   0308  6F          	ld	l, a
+750   0309  7B          	ld	a, e
+751   030A  95          	sub	a, l
+752   030B  7A          	ld	a, d
+753   030C  9C          	sbc	a, h
+754   030D  38 04       	jr	C,l_dir_rewind_00105
+755   030F              l_dir_rewind_00101:
+756   030F              ;fat/pff.c:525: return FR_DISK_ERR;
+757   030F  2E 01       	ld	l,0x01
+758   0311  18 48       	jr	l_dir_rewind_00109
+759   0313              ;fat/pff.c:528: clst = (CLUST)fs->dirbase;
+760   0313              l_dir_rewind_00105:
+761   0313              ;fat/pff.c:530: dj->clust = clst;						/* Current cluster */
+762   0313  DD 7E FC    	ld	a,(ix-4)
+763   0316  C6 06       	add	a,0x06
+764   0318  6F          	ld	l, a
+765   0319  DD 7E FD    	ld	a,(ix-3)
+766   031C  CE 00       	adc	a,0x00
+767   031E  67          	ld	h, a
+768   031F  73          	ld	(hl), e
+769   0320  23          	inc	hl
+770   0321  72          	ld	(hl), d
+771   0322              ;fat/pff.c:531: dj->sect = (_FS_32ONLY || clst) ? clust2sect(clst) : fs->dirbase;	/* Current sector */
+772   0322  DD 7E FC    	ld	a,(ix-4)
+773   0325  C6 08       	add	a,0x08
+774   0327  DD 77 FE    	ld	(ix-2),a
+775   032A  DD 7E FD    	ld	a,(ix-3)
+776   032D  CE 00       	adc	a,0x00
+777   032F  DD 77 FF    	ld	(ix-1),a
+778   0332  7A          	ld	a, d
+779   0333  B3          	or	a, e
+780   0334  28 09       	jr	Z,l_dir_rewind_00111
+781   0336  D5          	push	de
+782   0337  CD 17 02    	call	_clust2sect
+783   033A  F1          	pop	af
+784   033B  4D          	ld	c, l
+785   033C  44          	ld	b, h
+786   033D  18 0D       	jr	l_dir_rewind_00112
+787   033F              l_dir_rewind_00111:
+788   033F  69          	ld	l, c
+789   0340  60          	ld	h, b
+790   0341  11 0C 00    	ld	de,0x000c
+791   0344  19          	add	hl, de
+792   0345  4E          	ld	c, (hl)
+793   0346  23          	inc	hl
+794   0347  46          	ld	b, (hl)
+795   0348  23          	inc	hl
+796   0349  5E          	ld	e, (hl)
+797   034A  23          	inc	hl
+798   034B  56          	ld	d, (hl)
+799   034C              l_dir_rewind_00112:
+800   034C  DD 6E FE    	ld	l,(ix-2)
+801   034F  DD 66 FF    	ld	h,(ix-1)
+802   0352  71          	ld	(hl), c
+803   0353  23          	inc	hl
+804   0354  70          	ld	(hl), b
+805   0355  23          	inc	hl
+806   0356  73          	ld	(hl), e
+807   0357  23          	inc	hl
+808   0358  72          	ld	(hl), d
+809   0359              ;fat/pff.c:533: return FR_OK;	/* Seek succeeded */
+810   0359  2E 00       	ld	l,0x00
+811   035B              l_dir_rewind_00109:
+812   035B              ;fat/pff.c:534: }
+813   035B  DD F9       	ld	sp, ix
+814   035D  DD E1       	pop	ix
+815   035F  C9          	ret
+816   0360              	SECTION code_compiler
+817   0360              ;fat/pff.c:543: static FRESULT dir_next (	/* FR_OK:Succeeded, FR_NO_FILE:End of table */
+818   0360              ;	---------------------------------
+819   0360              ; Function dir_next
+820   0360              ; ---------------------------------
+821   0360              _dir_next:
+822   0360  DD E5       	push	ix
+823   0362  DD 21 00 00 	ld	ix,0
+824   0366  DD 39       	add	ix,sp
+825   0368  21 F6 FF    	ld	hl, -10
+826   036B  39          	add	hl, sp
+827   036C  F9          	ld	sp, hl
+828   036D              ;fat/pff.c:549: FATFS *fs = FatFs;
+829   036D  2A 00 00    	ld	hl, (_FatFs)
+830   0370  E3          	ex	(sp), hl
+831   0371              ;fat/pff.c:552: i = dj->index + 1;
+832   0371  DD 4E 04    	ld	c,(ix+4)
+833   0374  DD 46 05    	ld	b,(ix+5)
+834   0377  69          	ld	l, c
+835   0378  60          	ld	h, b
+836   0379  5E          	ld	e, (hl)
+837   037A  23          	inc	hl
+838   037B  56          	ld	d, (hl)
+839   037C  13          	inc	de
+840   037D  DD 73 F8    	ld	(ix-8),e
+841   0380              ;fat/pff.c:553: if (!i || !dj->sect) return FR_NO_FILE;	/* Report EOT when index has reached 65535 */
+842   0380  DD 72 F9    	ld	(ix-7),d
+843   0383  7A          	ld	a, d
+844   0384  DD B6 F8    	or	a,(ix-8)
+845   0387  28 1E       	jr	Z,l_dir_next_00101
+846   0389  21 08 00    	ld	hl,0x0008
+847   038C  09          	add	hl, bc
+848   038D  DD 75 FA    	ld	(ix-6),l
+849   0390  DD 74 FB    	ld	(ix-5),h
+850   0393  DD 6E FA    	ld	l,(ix-6)
+851   0396  DD 66 FB    	ld	h,(ix-5)
+852   0399  5E          	ld	e, (hl)
+853   039A  23          	inc	hl
+854   039B  56          	ld	d, (hl)
+855   039C  23          	inc	hl
+856   039D  23          	inc	hl
+857   039E  7E          	ld	a, (hl)
+858   039F  2B          	dec	hl
+859   03A0  6E          	ld	l, (hl)
+860   03A1  67          	ld	h,a
+861   03A2  B5          	or	a, l
+862   03A3  B2          	or	a, d
+863   03A4  B3          	or	a, e
+864   03A5  20 05       	jr	NZ,l_dir_next_00102
+865   03A7              l_dir_next_00101:
+866   03A7  2E 03       	ld	l,0x03
+867   03A9  C3 A0 04    	jp	l_dir_next_00117
+868   03AC              l_dir_next_00102:
+869   03AC              ;fat/pff.c:555: if (!(i % 16)) {		/* Sector changed? */
+870   03AC  DD 7E F8    	ld	a,(ix-8)
+871   03AF  E6 0F       	and	a,0x0f
+872   03B1  C2 95 04    	jp	NZ,l_dir_next_00116
+873   03B4              ;fat/pff.c:556: dj->sect++;			/* Next sector */
+874   03B4  7B          	ld	a, e
+875   03B5  C6 01       	add	a,0x01
+876   03B7  DD 77 FC    	ld	(ix-4),a
+877   03BA  7A          	ld	a, d
+878   03BB  CE 00       	adc	a,0x00
+879   03BD  DD 77 FD    	ld	(ix-3),a
+880   03C0  7D          	ld	a, l
+881   03C1  CE 00       	adc	a,0x00
+882   03C3  DD 77 FE    	ld	(ix-2),a
+883   03C6  7C          	ld	a, h
+884   03C7  CE 00       	adc	a,0x00
+885   03C9  DD 77 FF    	ld	(ix-1),a
+886   03CC  C5          	push	bc
+887   03CD  DD 5E FA    	ld	e,(ix-6)
+888   03D0  DD 56 FB    	ld	d,(ix-5)
+889   03D3  21 08 00    	ld	hl,0x0008
+890   03D6  39          	add	hl, sp
+891   03D7  01 04 00    	ld	bc,0x0004
+892   03DA  ED B0       	ldir
+893   03DC  C1          	pop	bc
+894   03DD              ;fat/pff.c:558: if (dj->clust == 0) {	/* Static table */
+895   03DD  21 06 00    	ld	hl,0x0006
+896   03E0  09          	add	hl, bc
+897   03E1  DD 75 FC    	ld	(ix-4),l
+898   03E4  DD 74 FD    	ld	(ix-3),h
+899   03E7  DD 6E FC    	ld	l,(ix-4)
+900   03EA  DD 66 FD    	ld	h,(ix-3)
+901   03ED  7E          	ld	a, (hl)
+902   03EE  DD 77 FE    	ld	(ix-2),a
+903   03F1  23          	inc	hl
+904   03F2  7E          	ld	a, (hl)
+905   03F3  DD 77 FF    	ld	(ix-1),a
+906   03F6  DD B6 FE    	or	a,(ix-2)
+907   03F9  20 19       	jr	NZ,l_dir_next_00113
+908   03FB              ;fat/pff.c:559: if (i >= fs->n_rootdir) return FR_NO_FILE;	/* Report EOT when end of table */
+909   03FB  E1          	pop	hl
+910   03FC  E5          	push	hl
+911   03FD  11 04 00    	ld	de,0x0004
+912   0400  19          	add	hl, de
+913   0401  5E          	ld	e, (hl)
+914   0402  23          	inc	hl
+915   0403  56          	ld	d, (hl)
+916   0404  DD 7E F8    	ld	a,(ix-8)
+917   0407  93          	sub	a, e
+918   0408  DD 7E F9    	ld	a,(ix-7)
+919   040B  9A          	sbc	a, d
+920   040C  DA 95 04    	jp	C, l_dir_next_00116
+921   040F  2E 03       	ld	l,0x03
+922   0411  C3 A0 04    	jp	l_dir_next_00117
+923   0414              l_dir_next_00113:
+924   0414              ;fat/pff.c:562: if (((i / 16) & (fs->csize - 1)) == 0) {	/* Cluster changed? */
+925   0414  DD 5E F8    	ld	e,(ix-8)
+926   0417  DD 56 F9    	ld	d,(ix-7)
+927   041A  CB 3A       	srl	d
+928   041C  CB 1B       	rr	e
+929   041E  CB 3A       	srl	d
+930   0420  CB 1B       	rr	e
+931   0422  CB 3A       	srl	d
+932   0424  CB 1B       	rr	e
+933   0426  CB 3A       	srl	d
+934   0428  CB 1B       	rr	e
+935   042A  E1          	pop	hl
+936   042B  E5          	push	hl
+937   042C  23          	inc	hl
+938   042D  23          	inc	hl
+939   042E  6E          	ld	l, (hl)
+940   042F  26 00       	ld	h,0x00
+941   0431  2B          	dec	hl
+942   0432  7D          	ld	a, l
+943   0433  A3          	and	a, e
+944   0434  5F          	ld	e, a
+945   0435  7C          	ld	a, h
+946   0436  A2          	and	a, d
+947   0437  B3          	or	a, e
+948   0438  20 5B       	jr	NZ,l_dir_next_00116
+949   043A              ;fat/pff.c:563: clst = get_fat(dj->clust);		/* Get next cluster */
+950   043A  C5          	push	bc
+951   043B  DD 6E FE    	ld	l,(ix-2)
+952   043E  DD 66 FF    	ld	h,(ix-1)
+953   0441  E5          	push	hl
+954   0442  CD 53 01    	call	_get_fat
+955   0445  F1          	pop	af
+956   0446  C1          	pop	bc
+957   0447  EB          	ex	de,hl
+958   0448              ;fat/pff.c:564: if (clst <= 1) return FR_DISK_ERR;
+959   0448  3E 01       	ld	a,0x01
+960   044A  BB          	cp	a, e
+961   044B  3E 00       	ld	a,0x00
+962   044D  9A          	sbc	a, d
+963   044E  38 04       	jr	C,l_dir_next_00107
+964   0450  2E 01       	ld	l,0x01
+965   0452  18 4C       	jr	l_dir_next_00117
+966   0454              l_dir_next_00107:
+967   0454              ;fat/pff.c:565: if (clst >= fs->n_fatent) return FR_NO_FILE;	/* Report EOT when it reached end of dynamic table */
+968   0454  E1          	pop	hl
+969   0455  E5          	push	hl
+970   0456  C5          	push	bc
+971   0457  01 06 00    	ld	bc,0x0006
+972   045A  09          	add	hl, bc
+973   045B  C1          	pop	bc
+974   045C  7E          	ld	a, (hl)
+975   045D  23          	inc	hl
+976   045E  66          	ld	h, (hl)
+977   045F  6F          	ld	l, a
+978   0460  7B          	ld	a, e
+979   0461  95          	sub	a, l
+980   0462  7A          	ld	a, d
+981   0463  9C          	sbc	a, h
+982   0464  38 04       	jr	C,l_dir_next_00109
+983   0466  2E 03       	ld	l,0x03
+984   0468  18 36       	jr	l_dir_next_00117
+985   046A              l_dir_next_00109:
+986   046A              ;fat/pff.c:566: dj->clust = clst;				/* Initialize data for new cluster */
+987   046A  DD 6E FC    	ld	l,(ix-4)
+988   046D  DD 66 FD    	ld	h,(ix-3)
+989   0470  73          	ld	(hl), e
+990   0471  23          	inc	hl
+991   0472  72          	ld	(hl), d
+992   0473              ;fat/pff.c:567: dj->sect = clust2sect(clst);
+993   0473  C5          	push	bc
+994   0474  D5          	push	de
+995   0475  CD 17 02    	call	_clust2sect
+996   0478  F1          	pop	af
+997   0479  DD 75 FC    	ld	(ix-4),l
+998   047C  DD 74 FD    	ld	(ix-3),h
+999   047F  DD 73 FE    	ld	(ix-2),e
+1000  0482  DD 72 FF    	ld	(ix-1),d
+1001  0485  DD 5E FA    	ld	e,(ix-6)
+1002  0488  DD 56 FB    	ld	d,(ix-5)
+1003  048B  21 08 00    	ld	hl,0x0008
+1004  048E  39          	add	hl, sp
+1005  048F  01 04 00    	ld	bc,0x0004
+1006  0492  ED B0       	ldir
+1007  0494  C1          	pop	bc
+1008  0495              l_dir_next_00116:
+1009  0495              ;fat/pff.c:572: dj->index = i;
+1010  0495  DD 7E F8    	ld	a,(ix-8)
+1011  0498  02          	ld	(bc), a
+1012  0499  03          	inc	bc
+1013  049A  DD 7E F9    	ld	a,(ix-7)
+1014  049D  02          	ld	(bc), a
+1015  049E              ;fat/pff.c:574: return FR_OK;
+1016  049E  2E 00       	ld	l,0x00
+1017  04A0              l_dir_next_00117:
+1018  04A0              ;fat/pff.c:575: }
+1019  04A0  DD F9       	ld	sp, ix
+1020  04A2  DD E1       	pop	ix
+1021  04A4  C9          	ret
+1022  04A5              	SECTION code_compiler
+1023  04A5              ;fat/pff.c:584: static FRESULT dir_find (
+1024  04A5              ;	---------------------------------
+1025  04A5              ; Function dir_find
+1026  04A5              ; ---------------------------------
+1027  04A5              _dir_find:
+1028  04A5  DD E5       	push	ix
+1029  04A7  DD 21 00 00 	ld	ix,0
+1030  04AB  DD 39       	add	ix,sp
+1031  04AD  21 F7 FF    	ld	hl, -9
+1032  04B0  39          	add	hl, sp
+1033  04B1  F9          	ld	sp, hl
+1034  04B2              ;fat/pff.c:593: res = dir_rewind(dj);			/* Rewind directory object */
+1035  04B2  DD 6E 04    	ld	l,(ix+4)
+1036  04B5  DD 66 05    	ld	h,(ix+5)
+1037  04B8  E5          	push	hl
+1038  04B9  CD CE 02    	call	_dir_rewind
+1039  04BC  F1          	pop	af
+1040  04BD              ;fat/pff.c:594: if (res != FR_OK) return res;
+1041  04BD  7D          	ld	a, l
+1042  04BE  B7          	or	a, a
+1043  04BF              ;fat/pff.c:596: do {
+1044  04BF  C2 8A 05    	jp	NZ,l_dir_find_00113
+1045  04C2  DD 4E 04    	ld	c,(ix+4)
+1046  04C5  DD 46 05    	ld	b,(ix+5)
+1047  04C8  DD 71 FB    	ld	(ix-5),c
+1048  04CB  DD 70 FC    	ld	(ix-4),b
+1049  04CE              l_dir_find_00110:
+1050  04CE              ;fat/pff.c:597: res = disk_readp(dir, dj->sect, (dj->index % 16) * 32, 32)	/* Read an entry */
+1051  04CE  69          	ld	l, c
+1052  04CF  60          	ld	h, b
+1053  04D0  7E          	ld	a, (hl)
+1054  04D1  E6 0F       	and	a,0x0f
+1055  04D3  6F          	ld	l, a
+1056  04D4  26 00       	ld	h,0x00
+1057  04D6  29          	add	hl, hl
+1058  04D7  29          	add	hl, hl
+1059  04D8  29          	add	hl, hl
+1060  04D9  29          	add	hl, hl
+1061  04DA  29          	add	hl, hl
+1062  04DB  EB          	ex	de,hl
+1063  04DC  DD 6E FB    	ld	l,(ix-5)
+1064  04DF  DD 66 FC    	ld	h,(ix-4)
+1065  04E2  C5          	push	bc
+1066  04E3  01 08 00    	ld	bc,0x0008
+1067  04E6  09          	add	hl, bc
+1068  04E7  C1          	pop	bc
+1069  04E8  7E          	ld	a, (hl)
+1070  04E9  DD 77 F7    	ld	(ix-9),a
+1071  04EC  23          	inc	hl
+1072  04ED  7E          	ld	a, (hl)
+1073  04EE  DD 77 F8    	ld	(ix-8),a
+1074  04F1  23          	inc	hl
+1075  04F2  7E          	ld	a, (hl)
+1076  04F3  DD 77 F9    	ld	(ix-7),a
+1077  04F6  23          	inc	hl
+1078  04F7  7E          	ld	a, (hl)
+1079  04F8  DD 77 FA    	ld	(ix-6),a
+1080  04FB  C5          	push	bc
+1081  04FC  21 20 00    	ld	hl,0x0020
+1082  04FF  E5          	push	hl
+1083  0500  D5          	push	de
+1084  0501  DD 6E F9    	ld	l,(ix-7)
+1085  0504  DD 66 FA    	ld	h,(ix-6)
+1086  0507  E5          	push	hl
+1087  0508  DD 6E F7    	ld	l,(ix-9)
+1088  050B  DD 66 F8    	ld	h,(ix-8)
+1089  050E  E5          	push	hl
+1090  050F  DD 6E 06    	ld	l,(ix+6)
+1091  0512  DD 66 07    	ld	h,(ix+7)
+1092  0515  E5          	push	hl
+1093  0516  CD 00 00    	call	_disk_readp
+1094  0519  FD 21 0A 00 	ld	iy,10
+1095  051D  FD 39       	add	iy, sp
+1096  051F  FD F9       	ld	sp, iy
+1097  0521  7D          	ld	a, l
+1098  0522  C1          	pop	bc
+1099  0523  B7          	or	a, a
+1100  0524  28 05       	jr	Z,l_dir_find_00115
+1101  0526              ;fat/pff.c:598: ? FR_DISK_ERR : FR_OK;
+1102  0526  11 01 00    	ld	de,0x0001
+1103  0529  18 03       	jr	l_dir_find_00116
+1104  052B              l_dir_find_00115:
+1105  052B  11 00 00    	ld	de,0x0000
+1106  052E              l_dir_find_00116:
+1107  052E              ;fat/pff.c:599: if (res != FR_OK) break;
+1108  052E  DD 73 FD    	ld	(ix-3),e
+1109  0531  7B          	ld	a, e
+1110  0532  B7          	or	a, a
+1111  0533  20 52       	jr	NZ,l_dir_find_00112
+1112  0535              ;fat/pff.c:600: c = dir[DIR_Name];	/* First character */
+1113  0535  DD 6E 06    	ld	l,(ix+6)
+1114  0538  DD 66 07    	ld	h,(ix+7)
+1115  053B  7E          	ld	a, (hl)
+1116  053C              ;fat/pff.c:601: if (c == 0) { res = FR_NO_FILE; break; }	/* Reached to end of table */
+1117  053C  B7          	or	a, a
+1118  053D  20 06       	jr	NZ,l_dir_find_00106
+1119  053F  DD 36 FD 03 	ld	(ix-3),0x03
+1120  0543  18 42       	jr	l_dir_find_00112
+1121  0545              l_dir_find_00106:
+1122  0545              ;fat/pff.c:602: if (!(dir[DIR_Attr] & AM_VOL) && !mem_cmp(dir, dj->fn, 11)) break;	/* Is it a valid entry? */
+1123  0545  11 0B 00    	ld	de,0x000b
+1124  0548  19          	add	hl, de
+1125  0549  CB 5E       	bit	3,(hl)
+1126  054B  20 2B       	jr	NZ,l_dir_find_00108
+1127  054D  69          	ld	l, c
+1128  054E  60          	ld	h, b
+1129  054F  23          	inc	hl
+1130  0550  23          	inc	hl
+1131  0551  5E          	ld	e, (hl)
+1132  0552  23          	inc	hl
+1133  0553  56          	ld	d, (hl)
+1134  0554  DD 73 FE    	ld	(ix-2),e
+1135  0557  DD 72 FF    	ld	(ix-1),d
+1136  055A  DD 5E 06    	ld	e,(ix+6)
+1137  055D  DD 56 07    	ld	d,(ix+7)
+1138  0560  C5          	push	bc
+1139  0561  21 0B 00    	ld	hl,0x000b
+1140  0564  E5          	push	hl
+1141  0565  DD 6E FE    	ld	l,(ix-2)
+1142  0568  DD 66 FF    	ld	h,(ix-1)
+1143  056B  E5          	push	hl
+1144  056C  D5          	push	de
+1145  056D  CD F2 00    	call	_mem_cmp
+1146  0570  F1          	pop	af
+1147  0571  F1          	pop	af
+1148  0572  F1          	pop	af
+1149  0573  C1          	pop	bc
+1150  0574  7C          	ld	a, h
+1151  0575  B5          	or	a, l
+1152  0576  28 0F       	jr	Z,l_dir_find_00112
+1153  0578              l_dir_find_00108:
+1154  0578              ;fat/pff.c:603: res = dir_next(dj);					/* Next entry */
+1155  0578  C5          	push	bc
+1156  0579  C5          	push	bc
+1157  057A  CD 60 03    	call	_dir_next
+1158  057D  F1          	pop	af
+1159  057E  C1          	pop	bc
+1160  057F              ;fat/pff.c:604: } while (res == FR_OK);
+1161  057F  DD 75 FD    	ld	(ix-3),l
+1162  0582  7D          	ld	a, l
+1163  0583  B7          	or	a, a
+1164  0584  CA CE 04    	jp	Z, l_dir_find_00110
+1165  0587              l_dir_find_00112:
+1166  0587              ;fat/pff.c:606: return res;
+1167  0587  DD 6E FD    	ld	l,(ix-3)
+1168  058A              l_dir_find_00113:
+1169  058A              ;fat/pff.c:607: }
+1170  058A  DD F9       	ld	sp, ix
+1171  058C  DD E1       	pop	ix
+1172  058E  C9          	ret
+1173  058F              	SECTION code_compiler
+1174  058F              ;fat/pff.c:651: static FRESULT create_name (
+1175  058F              ;	---------------------------------
+1176  058F              ; Function create_name
+1177  058F              ; ---------------------------------
+1178  058F              _create_name:
+1179  058F  DD E5       	push	ix
+1180  0591  DD 21 00 00 	ld	ix,0
+1181  0595  DD 39       	add	ix,sp
+1182  0597  21 F9 FF    	ld	hl, -7
+1183  059A  39          	add	hl, sp
+1184  059B  F9          	ld	sp, hl
+1185  059C              ;fat/pff.c:663: sfn = dj->fn;
+1186  059C  DD 6E 04    	ld	l,(ix+4)
+1187  059F  DD 66 05    	ld	h,(ix+5)
+1188  05A2  23          	inc	hl
+1189  05A3  23          	inc	hl
+1190  05A4  4E          	ld	c, (hl)
+1191  05A5  23          	inc	hl
+1192  05A6  46          	ld	b, (hl)
+1193  05A7              ;fat/pff.c:664: mem_set(sfn, ' ', 11);
+1194  05A7  59          	ld	e, c
+1195  05A8  50          	ld	d, b
+1196  05A9  C5          	push	bc
+1197  05AA  21 0B 00    	ld	hl,0x000b
+1198  05AD  E5          	push	hl
+1199  05AE  2E 20       	ld	l,0x20
+1200  05B0  E5          	push	hl
+1201  05B1  D5          	push	de
+1202  05B2  CD CD 00    	call	_mem_set
+1203  05B5  21 06 00    	ld	hl,6
+1204  05B8  39          	add	hl, sp
+1205  05B9  F9          	ld	sp, hl
+1206  05BA  C1          	pop	bc
+1207  05BB              ;fat/pff.c:665: si = i = 0; ni = 8;
+1208  05BB  DD 36 FF 00 	ld	(ix-1),0x00
+1209  05BF  DD 36 F9 08 	ld	(ix-7),0x08
+1210  05C3              ;fat/pff.c:666: p = *path;
+1211  05C3  DD 7E 06    	ld	a,(ix+6)
+1212  05C6  DD 77 FA    	ld	(ix-6),a
+1213  05C9  DD 7E 07    	ld	a,(ix+7)
+1214  05CC  DD 77 FB    	ld	(ix-5),a
+1215  05CF  DD 6E FA    	ld	l,(ix-6)
+1216  05D2  DD 66 FB    	ld	h,(ix-5)
+1217  05D5  7E          	ld	a, (hl)
+1218  05D6  DD 77 FC    	ld	(ix-4),a
+1219  05D9  23          	inc	hl
+1220  05DA  7E          	ld	a, (hl)
+1221  05DB  DD 77 FD    	ld	(ix-3),a
+1222  05DE  1E 00       	ld	e,0x00
+1223  05E0              l_create_name_00120:
+1224  05E0              ;fat/pff.c:668: c = p[si++];
+1225  05E0  DD 6E FC    	ld	l,(ix-4)
+1226  05E3  DD 66 FD    	ld	h,(ix-3)
+1227  05E6  16 00       	ld	d,0x00
+1228  05E8  19          	add	hl, de
+1229  05E9  1C          	inc	e
+1230  05EA  56          	ld	d, (hl)
+1231  05EB              ;fat/pff.c:669: if (c <= ' ' || c == '/') break;	/* Break on end of segment */
+1232  05EB  3E 20       	ld	a,0x20
+1233  05ED  92          	sub	a, d
+1234  05EE  3E 00       	ld	a,0x00
+1235  05F0  17          	rla
+1236  05F1  DD 77 FE    	ld	(ix-2),a
+1237  05F4  DD CB FE 46 	bit	0,(ix-2)
+1238  05F8  28 3B       	jr	Z,l_create_name_00119
+1239  05FA              ;fat/pff.c:670: if (c == '.' || i >= ni) {
+1240  05FA  7A          	ld	a,d
+1241  05FB  FE 2F       	cp	a,0x2f
+1242  05FD  28 36       	jr	Z,l_create_name_00119
+1243  05FF  D6 2E       	sub	a,0x2e
+1244  0601  20 04       	jr	NZ,l_create_name_00162
+1245  0603  3E 01       	ld	a,0x01
+1246  0605  18 01       	jr	l_create_name_00163
+1247  0607              l_create_name_00162:
+1248  0607  AF          	xor	a,a
+1249  0608              l_create_name_00163:
+1250  0608  6F          	ld	l,a
+1251  0609  B7          	or	a, a
+1252  060A  20 08       	jr	NZ,l_create_name_00107
+1253  060C  DD 7E FF    	ld	a,(ix-1)
+1254  060F  DD 96 F9    	sub	a,(ix-7)
+1255  0612  38 15       	jr	C,l_create_name_00111
+1256  0614              l_create_name_00107:
+1257  0614              ;fat/pff.c:671: if (ni != 8 || c != '.') break;
+1258  0614  DD 7E F9    	ld	a,(ix-7)
+1259  0617  D6 08       	sub	a,0x08
+1260  0619  20 1A       	jr	NZ,l_create_name_00119
+1261  061B  CB 45       	bit	0, l
+1262  061D  28 16       	jr	Z,l_create_name_00119
+1263  061F              ;fat/pff.c:672: i = 8; ni = 11;
+1264  061F  DD 36 FF 08 	ld	(ix-1),0x08
+1265  0623  DD 36 F9 0B 	ld	(ix-7),0x0b
+1266  0627              ;fat/pff.c:673: continue;
+1267  0627  18 B7       	jr	l_create_name_00120
+1268  0629              ;fat/pff.c:683: if (PF_USE_LCC && IsLower(c)) c -= 0x20;	/* toupper */
+1269  0629              l_create_name_00111:
+1270  0629              ;fat/pff.c:684: sfn[i++] = c;
+1271  0629  DD 6E FF    	ld	l,(ix-1)
+1272  062C  DD 34 FF    	inc	(ix-1)
+1273  062F  26 00       	ld	h,0x00
+1274  0631  09          	add	hl, bc
+1275  0632  72          	ld	(hl), d
+1276  0633  18 AB       	jr	l_create_name_00120
+1277  0635              l_create_name_00119:
+1278  0635              ;fat/pff.c:687: *path = &p[si];						/* Rerurn pointer to the next segment */
+1279  0635  7B          	ld	a, e
+1280  0636  DD 86 FC    	add	a,(ix-4)
+1281  0639  5F          	ld	e, a
+1282  063A  3E 00       	ld	a,0x00
+1283  063C  DD 8E FD    	adc	a,(ix-3)
+1284  063F  57          	ld	d, a
+1285  0640  DD 6E FA    	ld	l,(ix-6)
+1286  0643  DD 66 FB    	ld	h,(ix-5)
+1287  0646  73          	ld	(hl), e
+1288  0647  23          	inc	hl
+1289  0648  72          	ld	(hl), d
+1290  0649              ;fat/pff.c:689: sfn[11] = (c <= ' ') ? 1 : 0;		/* Set last segment flag if end of path */
+1291  0649  21 0B 00    	ld	hl,0x000b
+1292  064C  09          	add	hl, bc
+1293  064D  DD CB FE 46 	bit	0,(ix-2)
+1294  0651  20 05       	jr	NZ,l_create_name_00123
+1295  0653  01 01 00    	ld	bc,0x0001
+1296  0656  18 03       	jr	l_create_name_00124
+1297  0658              l_create_name_00123:
+1298  0658  01 00 00    	ld	bc,0x0000
+1299  065B              l_create_name_00124:
+1300  065B  71          	ld	(hl), c
+1301  065C              ;fat/pff.c:691: return FR_OK;
+1302  065C  2E 00       	ld	l,0x00
+1303  065E              ;fat/pff.c:692: }
+1304  065E  DD F9       	ld	sp, ix
+1305  0660  DD E1       	pop	ix
+1306  0662  C9          	ret
+1307  0663              	SECTION code_compiler
+1308  0663              ;fat/pff.c:742: static FRESULT follow_path (	/* FR_OK(0): successful, !=0: error code */
+1309  0663              ;	---------------------------------
+1310  0663              ; Function follow_path
+1311  0663              ; ---------------------------------
+1312  0663              _follow_path:
+1313  0663  DD E5       	push	ix
+1314  0665  DD 21 00 00 	ld	ix,0
+1315  0669  DD 39       	add	ix,sp
+1316  066B  21 FA FF    	ld	hl, -6
+1317  066E  39          	add	hl, sp
+1318  066F  F9          	ld	sp, hl
+1319  0670              ;fat/pff.c:751: while (*path == ' ') path++;		/* Strip leading spaces */
+1320  0670  DD 6E 08    	ld	l,(ix+8)
+1321  0673  DD 66 09    	ld	h,(ix+9)
+1322  0676              l_follow_path_00101:
+1323  0676  7E          	ld	a, (hl)
+1324  0677  5D          	ld	e, l
+1325  0678  54          	ld	d, h
+1326  0679  13          	inc	de
+1327  067A  FE 20       	cp	a,0x20
+1328  067C  20 0A       	jr	NZ,l_follow_path_00131
+1329  067E  6B          	ld	l, e
+1330  067F  62          	ld	h, d
+1331  0680  DD 73 08    	ld	(ix+8),e
+1332  0683  DD 72 09    	ld	(ix+9),d
+1333  0686  18 EE       	jr	l_follow_path_00101
+1334  0688              l_follow_path_00131:
+1335  0688  DD 75 08    	ld	(ix+8),l
+1336  068B  DD 74 09    	ld	(ix+9),h
+1337  068E              ;fat/pff.c:752: if (*path == '/') path++;			/* Strip heading separator if exist */
+1338  068E  D6 2F       	sub	a,0x2f
+1339  0690  20 06       	jr	NZ,l_follow_path_00105
+1340  0692  DD 73 08    	ld	(ix+8),e
+1341  0695  DD 72 09    	ld	(ix+9),d
+1342  0698              l_follow_path_00105:
+1343  0698              ;fat/pff.c:753: dj->sclust = 0;						/* Set start directory (always root dir) */
+1344  0698  DD 4E 04    	ld	c,(ix+4)
+1345  069B  DD 46 05    	ld	b,(ix+5)
+1346  069E  21 04 00    	ld	hl,0x0004
+1347  06A1  09          	add	hl, bc
+1348  06A2  36 00       	ld	(hl),0x00
+1349  06A4  23          	inc	hl
+1350  06A5  36 00       	ld	(hl),0x00
+1351  06A7              ;fat/pff.c:755: if ((BYTE)*path < ' ') {			/* Null path means the root directory */
+1352  06A7  DD 5E 08    	ld	e,(ix+8)
+1353  06AA  DD 56 09    	ld	d,(ix+9)
+1354  06AD  1A          	ld	a, (de)
+1355  06AE  D6 20       	sub	a,0x20
+1356  06B0  30 11       	jr	NC,l_follow_path_00130
+1357  06B2              ;fat/pff.c:756: res = dir_rewind(dj);
+1358  06B2  C5          	push	bc
+1359  06B3  CD CE 02    	call	_dir_rewind
+1360  06B6  F1          	pop	af
+1361  06B7  5D          	ld	e, l
+1362  06B8              ;fat/pff.c:757: dir[0] = 0;
+1363  06B8  DD 4E 06    	ld	c,(ix+6)
+1364  06BB  DD 46 07    	ld	b,(ix+7)
+1365  06BE  AF          	xor	a, a
+1366  06BF  02          	ld	(bc), a
+1367  06C0  C3 43 07    	jp	l_follow_path_00117
+1368  06C3              l_follow_path_00130:
+1369  06C3  33          	inc	sp
+1370  06C4  33          	inc	sp
+1371  06C5  C5          	push	bc
+1372  06C6  DD 7E 06    	ld	a,(ix+6)
+1373  06C9  DD 77 FC    	ld	(ix-4),a
+1374  06CC  DD 7E 07    	ld	a,(ix+7)
+1375  06CF  DD 77 FD    	ld	(ix-3),a
+1376  06D2  DD 71 FE    	ld	(ix-2),c
+1377  06D5  DD 70 FF    	ld	(ix-1),b
+1378  06D8              l_follow_path_00118:
+1379  06D8              ;fat/pff.c:761: res = create_name(dj, &path);	/* Get a segment */
+1380  06D8  21 0E 00    	ld	hl,14
+1381  06DB  39          	add	hl, sp
+1382  06DC  C5          	push	bc
+1383  06DD  E5          	push	hl
+1384  06DE  C5          	push	bc
+1385  06DF  CD 8F 05    	call	_create_name
+1386  06E2  F1          	pop	af
+1387  06E3  F1          	pop	af
+1388  06E4  7D          	ld	a, l
+1389  06E5  C1          	pop	bc
+1390  06E6              ;fat/pff.c:762: if (res != FR_OK) break;
+1391  06E6  5F          	ld	e,a
+1392  06E7  B7          	or	a, a
+1393  06E8  20 59       	jr	NZ,l_follow_path_00117
+1394  06EA              ;fat/pff.c:763: res = dir_find(dj, dir);		/* Find it */
+1395  06EA  C5          	push	bc
+1396  06EB  DD 6E 06    	ld	l,(ix+6)
+1397  06EE  DD 66 07    	ld	h,(ix+7)
+1398  06F1  E5          	push	hl
+1399  06F2  C5          	push	bc
+1400  06F3  CD A5 04    	call	_dir_find
+1401  06F6  F1          	pop	af
+1402  06F7  F1          	pop	af
+1403  06F8  7D          	ld	a, l
+1404  06F9  C1          	pop	bc
+1405  06FA              ;fat/pff.c:764: if (res != FR_OK) break;		/* Could not find the object */
+1406  06FA  5F          	ld	e,a
+1407  06FB  B7          	or	a, a
+1408  06FC  20 45       	jr	NZ,l_follow_path_00117
+1409  06FE              ;fat/pff.c:765: if (dj->fn[11]) break;			/* Last segment match. Function completed. */
+1410  06FE  E1          	pop	hl
+1411  06FF  E5          	push	hl
+1412  0700  23          	inc	hl
+1413  0701  23          	inc	hl
+1414  0702  56          	ld	d, (hl)
+1415  0703  23          	inc	hl
+1416  0704  66          	ld	h, (hl)
+1417  0705  6A          	ld	l, d
+1418  0706  C5          	push	bc
+1419  0707  01 0B 00    	ld	bc,0x000b
+1420  070A  09          	add	hl, bc
+1421  070B  C1          	pop	bc
+1422  070C  7E          	ld	a, (hl)
+1423  070D  B7          	or	a, a
+1424  070E  20 33       	jr	NZ,l_follow_path_00117
+1425  0710              ;fat/pff.c:766: if (!(dir[DIR_Attr] & AM_DIR)) { /* Cannot follow path because it is a file */
+1426  0710  DD 6E FC    	ld	l,(ix-4)
+1427  0713  DD 66 FD    	ld	h,(ix-3)
+1428  0716  11 0B 00    	ld	de,0x000b
+1429  0719  19          	add	hl, de
+1430  071A  CB 66       	bit	4,(hl)
+1431  071C  20 04       	jr	NZ,l_follow_path_00113
+1432  071E              ;fat/pff.c:767: res = FR_NO_FILE; break;
+1433  071E  1E 03       	ld	e,0x03
+1434  0720  18 21       	jr	l_follow_path_00117
+1435  0722              l_follow_path_00113:
+1436  0722              ;fat/pff.c:769: dj->sclust = get_clust(dir);	/* Follow next */
+1437  0722  DD 7E FE    	ld	a,(ix-2)
+1438  0725  C6 04       	add	a,0x04
+1439  0727  6F          	ld	l, a
+1440  0728  DD 7E FF    	ld	a,(ix-1)
+1441  072B  CE 00       	adc	a,0x00
+1442  072D  67          	ld	h, a
+1443  072E  E5          	push	hl
+1444  072F  C5          	push	bc
+1445  0730  DD 5E 06    	ld	e,(ix+6)
+1446  0733  DD 56 07    	ld	d,(ix+7)
+1447  0736  D5          	push	de
+1448  0737  CD B6 02    	call	_get_clust
+1449  073A  F1          	pop	af
+1450  073B  EB          	ex	de,hl
+1451  073C  C1          	pop	bc
+1452  073D  E1          	pop	hl
+1453  073E  73          	ld	(hl), e
+1454  073F  23          	inc	hl
+1455  0740  72          	ld	(hl), d
+1456  0741  18 95       	jr	l_follow_path_00118
+1457  0743              l_follow_path_00117:
+1458  0743              ;fat/pff.c:773: return res;
+1459  0743  6B          	ld	l, e
+1460  0744              ;fat/pff.c:774: }
+1461  0744  DD F9       	ld	sp, ix
+1462  0746  DD E1       	pop	ix
+1463  0748  C9          	ret
+1464  0749              	SECTION code_compiler
+1465  0749              ;fat/pff.c:783: static BYTE check_fs (	/* 0:The FAT boot record, 1:Valid boot record but not an FAT, 2:Not a boot record, 3:Error */
+1466  0749              ;	---------------------------------
+1467  0749              ; Function check_fs
+1468  0749              ; ---------------------------------
+1469  0749              _check_fs:
+1470  0749  DD E5       	push	ix
+1471  074B  DD 21 00 00 	ld	ix,0
+1472  074F  DD 39       	add	ix,sp
+1473  0751              ;fat/pff.c:788: if (disk_readp(buf, sect, 510, 2)) {	/* Read the boot record */
+1474  0751  21 02 00    	ld	hl,0x0002
+1475  0754  E5          	push	hl
+1476  0755  21 FE 01    	ld	hl,0x01fe
+1477  0758  E5          	push	hl
+1478  0759  DD 6E 08    	ld	l,(ix+8)
+1479  075C  DD 66 09    	ld	h,(ix+9)
+1480  075F  E5          	push	hl
+1481  0760  DD 6E 06    	ld	l,(ix+6)
+1482  0763  DD 66 07    	ld	h,(ix+7)
+1483  0766  E5          	push	hl
+1484  0767  DD 6E 04    	ld	l,(ix+4)
+1485  076A  DD 66 05    	ld	h,(ix+5)
+1486  076D  E5          	push	hl
+1487  076E  CD 00 00    	call	_disk_readp
+1488  0771  FD 21 0A 00 	ld	iy,10
+1489  0775  FD 39       	add	iy, sp
+1490  0777  FD F9       	ld	sp, iy
+1491  0779  7D          	ld	a, l
+1492  077A  B7          	or	a, a
+1493  077B  28 04       	jr	Z,l_check_fs_00102
+1494  077D              ;fat/pff.c:789: return 3;
+1495  077D  2E 03       	ld	l,0x03
+1496  077F  18 5F       	jr	l_check_fs_00113
+1497  0781              l_check_fs_00102:
+1498  0781              ;fat/pff.c:791: if (ld_word(buf) != 0xAA55) {			/* Check record signature */
+1499  0781  DD 6E 04    	ld	l,(ix+4)
+1500  0784  DD 66 05    	ld	h,(ix+5)
+1501  0787  E5          	push	hl
+1502  0788  CD 00 00    	call	_ld_word
+1503  078B  F1          	pop	af
+1504  078C  7D          	ld	a, l
+1505  078D  D6 55       	sub	a,0x55
+1506  078F  20 05       	jr	NZ,l_check_fs_00135
+1507  0791  7C          	ld	a, h
+1508  0792  D6 AA       	sub	a,0xaa
+1509  0794  28 04       	jr	Z,l_check_fs_00107
+1510  0796              l_check_fs_00135:
+1511  0796              ;fat/pff.c:792: return 2;
+1512  0796  2E 02       	ld	l,0x02
+1513  0798  18 46       	jr	l_check_fs_00113
+1514  079A              ;fat/pff.c:795: if (!_FS_32ONLY && !disk_readp(buf, sect, BS_FilSysType, 2) && ld_word(buf) == 0x4146) {	/* Check FAT12/16 */
+1515  079A              l_check_fs_00107:
+1516  079A  21 02 00    	ld	hl,0x0002
+1517  079D  E5          	push	hl
+1518  079E  2E 36       	ld	l,0x36
+1519  07A0  E5          	push	hl
+1520  07A1  DD 6E 08    	ld	l,(ix+8)
+1521  07A4  DD 66 09    	ld	h,(ix+9)
+1522  07A7  E5          	push	hl
+1523  07A8  DD 6E 06    	ld	l,(ix+6)
+1524  07AB  DD 66 07    	ld	h,(ix+7)
+1525  07AE  E5          	push	hl
+1526  07AF  DD 6E 04    	ld	l,(ix+4)
+1527  07B2  DD 66 05    	ld	h,(ix+5)
+1528  07B5  E5          	push	hl
+1529  07B6  CD 00 00    	call	_disk_readp
+1530  07B9  FD 21 0A 00 	ld	iy,10
+1531  07BD  FD 39       	add	iy, sp
+1532  07BF  FD F9       	ld	sp, iy
+1533  07C1  7D          	ld	a, l
+1534  07C2  B7          	or	a, a
+1535  07C3  20 19       	jr	NZ,l_check_fs_00110
+1536  07C5  DD 6E 04    	ld	l,(ix+4)
+1537  07C8  DD 66 05    	ld	h,(ix+5)
+1538  07CB  E5          	push	hl
+1539  07CC  CD 00 00    	call	_ld_word
+1540  07CF  F1          	pop	af
+1541  07D0  7D          	ld	a, l
+1542  07D1  D6 46       	sub	a,0x46
+1543  07D3  20 09       	jr	NZ,l_check_fs_00110
+1544  07D5  7C          	ld	a, h
+1545  07D6  D6 41       	sub	a,0x41
+1546  07D8  20 04       	jr	NZ,l_check_fs_00110
+1547  07DA              ;fat/pff.c:796: return 0;
+1548  07DA  2E 00       	ld	l,0x00
+1549  07DC  18 02       	jr	l_check_fs_00113
+1550  07DE              ;fat/pff.c:799: return 0;
+1551  07DE              l_check_fs_00110:
+1552  07DE              ;fat/pff.c:801: return 1;
+1553  07DE  2E 01       	ld	l,0x01
+1554  07E0              l_check_fs_00113:
+1555  07E0              ;fat/pff.c:802: }
+1556  07E0  DD E1       	pop	ix
+1557  07E2  C9          	ret
+1558  07E3              	SECTION code_compiler
+1559  07E3              ;fat/pff.c:819: FRESULT pf_mount (
+1560  07E3              ;	---------------------------------
+1561  07E3              ; Function pf_mount
+1562  07E3              ; ---------------------------------
+1563  07E3              _pf_mount:
+1564  07E3  DD E5       	push	ix
+1565  07E5  DD 21 00 00 	ld	ix,0
+1566  07E9  DD 39       	add	ix,sp
+1567  07EB  21 C6 FF    	ld	hl, -58
+1568  07EE  39          	add	hl, sp
+1569  07EF  F9          	ld	sp, hl
+1570  07F0              ;fat/pff.c:827: FatFs = 0;
+1571  07F0  21 00 00    	ld	hl,0x0000
+1572  07F3  22 00 00    	ld	(_FatFs), hl
+1573  07F6              ;fat/pff.c:829: if (disk_initialize() & STA_NOINIT) {	/* Check if the drive is ready or not */
+1574  07F6  CD 00 00    	call	_disk_initialize
+1575  07F9  7D          	ld	a, l
+1576  07FA  0F          	rrca
+1577  07FB  30 05       	jr	NC,l_pf_mount_00102
+1578  07FD              ;fat/pff.c:830: return FR_NOT_READY;
+1579  07FD  2E 02       	ld	l,0x02
+1580  07FF  C3 1B 0C    	jp	l_pf_mount_00137
+1581  0802              l_pf_mount_00102:
+1582  0802              ;fat/pff.c:834: bsect = 0;
+1583  0802  AF          	xor	a, a
+1584  0803  DD 77 C6    	ld	(ix-58),a
+1585  0806  DD 77 C7    	ld	(ix-57),a
+1586  0809  DD 77 C8    	ld	(ix-56),a
+1587  080C  DD 77 C9    	ld	(ix-55),a
+1588  080F              ;fat/pff.c:835: fmt = check_fs(buf, bsect);			/* Check sector 0 as an SFD format */
+1589  080F  21 04 00    	ld	hl,4
+1590  0812  39          	add	hl, sp
+1591  0813  DD 75 EE    	ld	(ix-18),l
+1592  0816  DD 74 EF    	ld	(ix-17),h
+1593  0819  4D          	ld	c,l
+1594  081A  44          	ld	b,h
+1595  081B  21 00 00    	ld	hl,0x0000
+1596  081E  E5          	push	hl
+1597  081F  21 00 00    	ld	hl,0x0000
+1598  0822  E5          	push	hl
+1599  0823  C5          	push	bc
+1600  0824  CD 49 07    	call	_check_fs
+1601  0827  F1          	pop	af
+1602  0828  F1          	pop	af
+1603  0829  F1          	pop	af
+1604  082A  DD 75 FB    	ld	(ix-5),l
+1605  082D              ;fat/pff.c:841: if (buf[4]) {					/* Is the partition existing? */
+1606  082D  DD 7E EE    	ld	a,(ix-18)
+1607  0830  C6 04       	add	a,0x04
+1608  0832  DD 77 FE    	ld	(ix-2),a
+1609  0835  DD 7E EF    	ld	a,(ix-17)
+1610  0838  CE 00       	adc	a,0x00
+1611  083A  DD 77 FF    	ld	(ix-1),a
+1612  083D              ;fat/pff.c:836: if (fmt == 1) {						/* Not an FAT boot record, it may be FDISK format */
+1613  083D  DD 7E FB    	ld	a,(ix-5)
+1614  0840  3D          	dec	a
+1615  0841  C2 C1 08    	jp	NZ,l_pf_mount_00109
+1616  0844              ;fat/pff.c:838: if (disk_readp(buf, bsect, MBR_Table, 16)) {	/* 1st partition entry */
+1617  0844  DD 7E EE    	ld	a,(ix-18)
+1618  0847  DD 77 FC    	ld	(ix-4),a
+1619  084A  DD 7E EF    	ld	a,(ix-17)
+1620  084D  DD 77 FD    	ld	(ix-3),a
+1621  0850  21 10 00    	ld	hl,0x0010
+1622  0853  E5          	push	hl
+1623  0854  21 BE 01    	ld	hl,0x01be
+1624  0857  E5          	push	hl
+1625  0858  21 00 00    	ld	hl,0x0000
+1626  085B  E5          	push	hl
+1627  085C  21 00 00    	ld	hl,0x0000
+1628  085F  E5          	push	hl
+1629  0860  DD 6E FC    	ld	l,(ix-4)
+1630  0863  DD 66 FD    	ld	h,(ix-3)
+1631  0866  E5          	push	hl
+1632  0867  CD 00 00    	call	_disk_readp
+1633  086A  FD 21 0A 00 	ld	iy,10
+1634  086E  FD 39       	add	iy, sp
+1635  0870  FD F9       	ld	sp, iy
+1636  0872  7D          	ld	a, l
+1637  0873  B7          	or	a, a
+1638  0874  28 06       	jr	Z,l_pf_mount_00106
+1639  0876              ;fat/pff.c:839: fmt = 3;
+1640  0876  DD 36 FB 03 	ld	(ix-5),0x03
+1641  087A  18 45       	jr	l_pf_mount_00109
+1642  087C              l_pf_mount_00106:
+1643  087C              ;fat/pff.c:841: if (buf[4]) {					/* Is the partition existing? */
+1644  087C  DD 6E FE    	ld	l,(ix-2)
+1645  087F  DD 66 FF    	ld	h,(ix-1)
+1646  0882  7E          	ld	a, (hl)
+1647  0883  B7          	or	a, a
+1648  0884  28 3B       	jr	Z,l_pf_mount_00109
+1649  0886              ;fat/pff.c:842: bsect = ld_dword(&buf[8]);	/* Partition offset in LBA */
+1650  0886  DD 7E EE    	ld	a,(ix-18)
+1651  0889  C6 08       	add	a,0x08
+1652  088B  4F          	ld	c, a
+1653  088C  DD 7E EF    	ld	a,(ix-17)
+1654  088F  CE 00       	adc	a,0x00
+1655  0891  47          	ld	b, a
+1656  0892  C5          	push	bc
+1657  0893  CD 24 00    	call	_ld_dword
+1658  0896  F1          	pop	af
+1659  0897  DD 75 C6    	ld	(ix-58),l
+1660  089A  DD 74 C7    	ld	(ix-57),h
+1661  089D  DD 73 C8    	ld	(ix-56),e
+1662  08A0  DD 72 C9    	ld	(ix-55),d
+1663  08A3              ;fat/pff.c:843: fmt = check_fs(buf, bsect);	/* Check the partition */
+1664  08A3  DD 4E EE    	ld	c,(ix-18)
+1665  08A6  DD 46 EF    	ld	b,(ix-17)
+1666  08A9  DD 6E C8    	ld	l,(ix-56)
+1667  08AC  DD 66 C9    	ld	h,(ix-55)
+1668  08AF  E5          	push	hl
+1669  08B0  DD 6E C6    	ld	l,(ix-58)
+1670  08B3  DD 66 C7    	ld	h,(ix-57)
+1671  08B6  E5          	push	hl
+1672  08B7  C5          	push	bc
+1673  08B8  CD 49 07    	call	_check_fs
+1674  08BB  F1          	pop	af
+1675  08BC  F1          	pop	af
+1676  08BD  F1          	pop	af
+1677  08BE  DD 75 FB    	ld	(ix-5),l
+1678  08C1              l_pf_mount_00109:
+1679  08C1              ;fat/pff.c:847: if (fmt == 3) return FR_DISK_ERR;
+1680  08C1  DD 7E FB    	ld	a,(ix-5)
+1681  08C4  D6 03       	sub	a,0x03
+1682  08C6  20 05       	jr	NZ,l_pf_mount_00111
+1683  08C8  2E 01       	ld	l,0x01
+1684  08CA  C3 1B 0C    	jp	l_pf_mount_00137
+1685  08CD              l_pf_mount_00111:
+1686  08CD              ;fat/pff.c:848: if (fmt) return FR_NO_FILESYSTEM;	/* No valid FAT patition is found */
+1687  08CD  DD 7E FB    	ld	a,(ix-5)
+1688  08D0  B7          	or	a, a
+1689  08D1  28 05       	jr	Z,l_pf_mount_00113
+1690  08D3  2E 06       	ld	l,0x06
+1691  08D5  C3 1B 0C    	jp	l_pf_mount_00137
+1692  08D8              l_pf_mount_00113:
+1693  08D8              ;fat/pff.c:851: if (disk_readp(buf, bsect, 13, sizeof (buf))) return FR_DISK_ERR;
+1694  08D8  DD 4E EE    	ld	c,(ix-18)
+1695  08DB  DD 46 EF    	ld	b,(ix-17)
+1696  08DE  21 24 00    	ld	hl,0x0024
+1697  08E1  E5          	push	hl
+1698  08E2  2E 0D       	ld	l,0x0d
+1699  08E4  E5          	push	hl
+1700  08E5  DD 6E C8    	ld	l,(ix-56)
+1701  08E8  DD 66 C9    	ld	h,(ix-55)
+1702  08EB  E5          	push	hl
+1703  08EC  DD 6E C6    	ld	l,(ix-58)
+1704  08EF  DD 66 C7    	ld	h,(ix-57)
+1705  08F2  E5          	push	hl
+1706  08F3  C5          	push	bc
+1707  08F4  CD 00 00    	call	_disk_readp
+1708  08F7  FD 21 0A 00 	ld	iy,10
+1709  08FB  FD 39       	add	iy, sp
+1710  08FD  FD F9       	ld	sp, iy
+1711  08FF  7D          	ld	a, l
+1712  0900  B7          	or	a, a
+1713  0901  28 05       	jr	Z,l_pf_mount_00115
+1714  0903  2E 01       	ld	l,0x01
+1715  0905  C3 1B 0C    	jp	l_pf_mount_00137
+1716  0908              l_pf_mount_00115:
+1717  0908              ;fat/pff.c:853: fsize = ld_word(buf+BPB_FATSz16-13);				/* Number of sectors per FAT */
+1718  0908  DD 7E EE    	ld	a,(ix-18)
+1719  090B  C6 09       	add	a,0x09
+1720  090D  4F          	ld	c, a
+1721  090E  DD 7E EF    	ld	a,(ix-17)
+1722  0911  CE 00       	adc	a,0x00
+1723  0913  47          	ld	b, a
+1724  0914  C5          	push	bc
+1725  0915  CD 00 00    	call	_ld_word
+1726  0918  F1          	pop	af
+1727  0919  4D          	ld	c, l
+1728  091A  44          	ld	b, h
+1729  091B  1E 00       	ld	e,0x00
+1730  091D  16 00       	ld	d,0x00
+1731  091F              ;fat/pff.c:854: if (!fsize) fsize = ld_dword(buf+BPB_FATSz32-13);
+1732  091F  7A          	ld	a, d
+1733  0920  B3          	or	a, e
+1734  0921  B0          	or	a, b
+1735  0922  B1          	or	a, c
+1736  0923  20 13       	jr	NZ,l_pf_mount_00117
+1737  0925  DD 7E EE    	ld	a,(ix-18)
+1738  0928  C6 17       	add	a,0x17
+1739  092A  4F          	ld	c, a
+1740  092B  DD 7E EF    	ld	a,(ix-17)
+1741  092E  CE 00       	adc	a,0x00
+1742  0930  47          	ld	b, a
+1743  0931  C5          	push	bc
+1744  0932  CD 24 00    	call	_ld_dword
+1745  0935  F1          	pop	af
+1746  0936  4D          	ld	c, l
+1747  0937  44          	ld	b, h
+1748  0938              l_pf_mount_00117:
+1749  0938              ;fat/pff.c:856: fsize *= buf[BPB_NumFATs-13];						/* Number of sectors in FAT area */
+1750  0938  DD 6E EE    	ld	l,(ix-18)
+1751  093B  DD 66 EF    	ld	h,(ix-17)
+1752  093E  23          	inc	hl
+1753  093F  23          	inc	hl
+1754  0940  23          	inc	hl
+1755  0941  7E          	ld	a, (hl)
+1756  0942  DD 77 FA    	ld	(ix-6),a
+1757  0945  DD 36 FB 00 	ld	(ix-5),0x00
+1758  0949  DD 36 FC 00 	ld	(ix-4),0x00
+1759  094D  DD 36 FD 00 	ld	(ix-3),0x00
+1760  0951  DD 6E FC    	ld	l,(ix-4)
+1761  0954  DD 66 FD    	ld	h,(ix-3)
+1762  0957  E5          	push	hl
+1763  0958  DD 6E FA    	ld	l,(ix-6)
+1764  095B  DD 66 FB    	ld	h,(ix-5)
+1765  095E  E5          	push	hl
+1766  095F  D5          	push	de
+1767  0960  C5          	push	bc
+1768  0961  CD 00 00    	call	__mullong_callee
+1769  0964  DD 75 F0    	ld	(ix-16),l
+1770  0967  DD 74 F1    	ld	(ix-15),h
+1771  096A  DD 73 F2    	ld	(ix-14),e
+1772  096D  DD 72 F3    	ld	(ix-13),d
+1773  0970              ;fat/pff.c:857: fs->fatbase = bsect + ld_word(buf+BPB_RsvdSecCnt-13); /* FAT start sector (lba) */
+1774  0970  DD 4E 04    	ld	c,(ix+4)
+1775  0973  DD 46 05    	ld	b,(ix+5)
+1776  0976  21 08 00    	ld	hl,0x0008
+1777  0979  09          	add	hl, bc
+1778  097A  DD 75 F4    	ld	(ix-12),l
+1779  097D  DD 74 F5    	ld	(ix-11),h
+1780  0980  DD 7E EE    	ld	a,(ix-18)
+1781  0983  C6 01       	add	a,0x01
+1782  0985  DD 77 F6    	ld	(ix-10),a
+1783  0988  DD 7E EF    	ld	a,(ix-17)
+1784  098B  CE 00       	adc	a,0x00
+1785  098D  DD 77 F7    	ld	(ix-9),a
+1786  0990  DD 5E F6    	ld	e,(ix-10)
+1787  0993  DD 56 F7    	ld	d,(ix-9)
+1788  0996  C5          	push	bc
+1789  0997  D5          	push	de
+1790  0998  CD 00 00    	call	_ld_word
+1791  099B  F1          	pop	af
+1792  099C  C1          	pop	bc
+1793  099D  1E 00       	ld	e,0x00
+1794  099F  16 00       	ld	d,0x00
+1795  09A1  DD 7E C6    	ld	a,(ix-58)
+1796  09A4  85          	add	a, l
+1797  09A5  DD 77 FA    	ld	(ix-6),a
+1798  09A8  DD 7E C7    	ld	a,(ix-57)
+1799  09AB  8C          	adc	a, h
+1800  09AC  DD 77 FB    	ld	(ix-5),a
+1801  09AF  DD 7E C8    	ld	a,(ix-56)
+1802  09B2  8B          	adc	a, e
+1803  09B3  DD 77 FC    	ld	(ix-4),a
+1804  09B6  DD 7E C9    	ld	a,(ix-55)
+1805  09B9  8A          	adc	a, d
+1806  09BA  DD 77 FD    	ld	(ix-3),a
+1807  09BD  C5          	push	bc
+1808  09BE  DD 5E F4    	ld	e,(ix-12)
+1809  09C1  DD 56 F5    	ld	d,(ix-11)
+1810  09C4  21 36 00    	ld	hl,0x0036
+1811  09C7  39          	add	hl, sp
+1812  09C8  01 04 00    	ld	bc,0x0004
+1813  09CB  ED B0       	ldir
+1814  09CD  C1          	pop	bc
+1815  09CE              ;fat/pff.c:858: fs->csize = buf[BPB_SecPerClus-13];					/* Number of sectors per cluster */
+1816  09CE  21 02 00    	ld	hl,0x0002
+1817  09D1  09          	add	hl, bc
+1818  09D2  DD 75 F8    	ld	(ix-8),l
+1819  09D5  DD 74 F9    	ld	(ix-7),h
+1820  09D8  DD 6E EE    	ld	l,(ix-18)
+1821  09DB  DD 66 EF    	ld	h,(ix-17)
+1822  09DE  7E          	ld	a, (hl)
+1823  09DF  DD 6E F8    	ld	l,(ix-8)
+1824  09E2  DD 66 F9    	ld	h,(ix-7)
+1825  09E5  77          	ld	(hl), a
+1826  09E6              ;fat/pff.c:859: fs->n_rootdir = ld_word(buf+BPB_RootEntCnt-13);		/* Nmuber of root directory entries */
+1827  09E6  21 04 00    	ld	hl,0x0004
+1828  09E9  09          	add	hl, bc
+1829  09EA  DD 75 FA    	ld	(ix-6),l
+1830  09ED  DD 74 FB    	ld	(ix-5),h
+1831  09F0  DD 5E FE    	ld	e,(ix-2)
+1832  09F3  DD 56 FF    	ld	d,(ix-1)
+1833  09F6  C5          	push	bc
+1834  09F7  D5          	push	de
+1835  09F8  CD 00 00    	call	_ld_word
+1836  09FB  F1          	pop	af
+1837  09FC  EB          	ex	de,hl
+1838  09FD  C1          	pop	bc
+1839  09FE  DD 6E FA    	ld	l,(ix-6)
+1840  0A01  DD 66 FB    	ld	h,(ix-5)
+1841  0A04  73          	ld	(hl), e
+1842  0A05  23          	inc	hl
+1843  0A06  72          	ld	(hl), d
+1844  0A07              ;fat/pff.c:860: tsect = ld_word(buf+BPB_TotSec16-13);				/* Number of sectors on the file system */
+1845  0A07  DD 7E EE    	ld	a,(ix-18)
+1846  0A0A  C6 06       	add	a,0x06
+1847  0A0C  5F          	ld	e, a
+1848  0A0D  DD 7E EF    	ld	a,(ix-17)
+1849  0A10  CE 00       	adc	a,0x00
+1850  0A12  57          	ld	d, a
+1851  0A13  C5          	push	bc
+1852  0A14  D5          	push	de
+1853  0A15  CD 00 00    	call	_ld_word
+1854  0A18  F1          	pop	af
+1855  0A19  C1          	pop	bc
+1856  0A1A  1E 00       	ld	e,0x00
+1857  0A1C  16 00       	ld	d,0x00
+1858  0A1E  DD 75 FC    	ld	(ix-4),l
+1859  0A21  DD 74 FD    	ld	(ix-3),h
+1860  0A24  DD 73 FE    	ld	(ix-2),e
+1861  0A27  DD 72 FF    	ld	(ix-1),d
+1862  0A2A              ;fat/pff.c:861: if (!tsect) tsect = ld_dword(buf+BPB_TotSec32-13);
+1863  0A2A  7A          	ld	a, d
+1864  0A2B  B3          	or	a, e
+1865  0A2C  B4          	or	a, h
+1866  0A2D  B5          	or	a, l
+1867  0A2E  20 1F       	jr	NZ,l_pf_mount_00119
+1868  0A30  DD 7E EE    	ld	a,(ix-18)
+1869  0A33  C6 13       	add	a,0x13
+1870  0A35  5F          	ld	e, a
+1871  0A36  DD 7E EF    	ld	a,(ix-17)
+1872  0A39  CE 00       	adc	a,0x00
+1873  0A3B  57          	ld	d, a
+1874  0A3C  C5          	push	bc
+1875  0A3D  D5          	push	de
+1876  0A3E  CD 24 00    	call	_ld_dword
+1877  0A41  F1          	pop	af
+1878  0A42  C1          	pop	bc
+1879  0A43  DD 75 FC    	ld	(ix-4),l
+1880  0A46  DD 74 FD    	ld	(ix-3),h
+1881  0A49  DD 73 FE    	ld	(ix-2),e
+1882  0A4C  DD 72 FF    	ld	(ix-1),d
+1883  0A4F              l_pf_mount_00119:
+1884  0A4F              ;fat/pff.c:863: - ld_word(buf+BPB_RsvdSecCnt-13) - fsize - fs->n_rootdir / 16
+1885  0A4F  DD 5E F6    	ld	e,(ix-10)
+1886  0A52  DD 56 F7    	ld	d,(ix-9)
+1887  0A55  C5          	push	bc
+1888  0A56  D5          	push	de
+1889  0A57  CD 00 00    	call	_ld_word
+1890  0A5A  F1          	pop	af
+1891  0A5B  C1          	pop	bc
+1892  0A5C  1E 00       	ld	e,0x00
+1893  0A5E  16 00       	ld	d,0x00
+1894  0A60  DD 7E FC    	ld	a,(ix-4)
+1895  0A63  95          	sub	a, l
+1896  0A64  6F          	ld	l, a
+1897  0A65  DD 7E FD    	ld	a,(ix-3)
+1898  0A68  9C          	sbc	a, h
+1899  0A69  67          	ld	h, a
+1900  0A6A  DD 7E FE    	ld	a,(ix-2)
+1901  0A6D  9B          	sbc	a, e
+1902  0A6E  5F          	ld	e, a
+1903  0A6F  DD 7E FF    	ld	a,(ix-1)
+1904  0A72  9A          	sbc	a, d
+1905  0A73  57          	ld	d, a
+1906  0A74  7D          	ld	a, l
+1907  0A75  DD 96 F0    	sub	a,(ix-16)
+1908  0A78  DD 77 C6    	ld	(ix-58),a
+1909  0A7B  7C          	ld	a, h
+1910  0A7C  DD 9E F1    	sbc	a,(ix-15)
+1911  0A7F  DD 77 C7    	ld	(ix-57),a
+1912  0A82  7B          	ld	a, e
+1913  0A83  DD 9E F2    	sbc	a,(ix-14)
+1914  0A86  DD 77 C8    	ld	(ix-56),a
+1915  0A89  7A          	ld	a, d
+1916  0A8A  DD 9E F3    	sbc	a,(ix-13)
+1917  0A8D  DD 77 C9    	ld	(ix-55),a
+1918  0A90  DD 6E FA    	ld	l,(ix-6)
+1919  0A93  DD 66 FB    	ld	h,(ix-5)
+1920  0A96  5E          	ld	e, (hl)
+1921  0A97  23          	inc	hl
+1922  0A98  56          	ld	d, (hl)
+1923  0A99  CB 3A       	srl	d
+1924  0A9B  CB 1B       	rr	e
+1925  0A9D  CB 3A       	srl	d
+1926  0A9F  CB 1B       	rr	e
+1927  0AA1  CB 3A       	srl	d
+1928  0AA3  CB 1B       	rr	e
+1929  0AA5  CB 3A       	srl	d
+1930  0AA7  CB 1B       	rr	e
+1931  0AA9  2E 00       	ld	l,0x00
+1932  0AAB  26 00       	ld	h,0x00
+1933  0AAD  DD 7E C6    	ld	a,(ix-58)
+1934  0AB0  93          	sub	a, e
+1935  0AB1  DD 77 FC    	ld	(ix-4),a
+1936  0AB4  DD 7E C7    	ld	a,(ix-57)
+1937  0AB7  9A          	sbc	a, d
+1938  0AB8  DD 77 FD    	ld	(ix-3),a
+1939  0ABB  DD 7E C8    	ld	a,(ix-56)
+1940  0ABE  9D          	sbc	a, l
+1941  0ABF  DD 77 FE    	ld	(ix-2),a
+1942  0AC2  DD 7E C9    	ld	a,(ix-55)
+1943  0AC5  9C          	sbc	a, h
+1944  0AC6  DD 77 FF    	ld	(ix-1),a
+1945  0AC9              ;fat/pff.c:864: ) / fs->csize + 2;
+1946  0AC9  DD 6E F8    	ld	l,(ix-8)
+1947  0ACC  DD 66 F9    	ld	h,(ix-7)
+1948  0ACF  5E          	ld	e, (hl)
+1949  0AD0  16 00       	ld	d,0x00
+1950  0AD2  2E 00       	ld	l,0x00
+1951  0AD4  26 00       	ld	h,0x00
+1952  0AD6  C5          	push	bc
+1953  0AD7  E5          	push	hl
+1954  0AD8  D5          	push	de
+1955  0AD9  DD 6E FE    	ld	l,(ix-2)
+1956  0ADC  DD 66 FF    	ld	h,(ix-1)
+1957  0ADF  E5          	push	hl
+1958  0AE0  DD 6E FC    	ld	l,(ix-4)
+1959  0AE3  DD 66 FD    	ld	h,(ix-3)
+1960  0AE6  E5          	push	hl
+1961  0AE7  CD 00 00    	call	__divulong_callee
+1962  0AEA  C1          	pop	bc
+1963  0AEB  7D          	ld	a, l
+1964  0AEC  C6 02       	add	a,0x02
+1965  0AEE  DD 77 FC    	ld	(ix-4),a
+1966  0AF1  7C          	ld	a, h
+1967  0AF2  CE 00       	adc	a,0x00
+1968  0AF4  DD 77 FD    	ld	(ix-3),a
+1969  0AF7  7B          	ld	a, e
+1970  0AF8  CE 00       	adc	a,0x00
+1971  0AFA  DD 77 FE    	ld	(ix-2),a
+1972  0AFD  7A          	ld	a, d
+1973  0AFE  CE 00       	adc	a,0x00
+1974  0B00  DD 77 FF    	ld	(ix-1),a
+1975  0B03              ;fat/pff.c:865: fs->n_fatent = (CLUST)mclst;
+1976  0B03  21 06 00    	ld	hl,0x0006
+1977  0B06  09          	add	hl, bc
+1978  0B07  DD 5E FC    	ld	e,(ix-4)
+1979  0B0A  DD 7E FD    	ld	a,(ix-3)
+1980  0B0D  73          	ld	(hl), e
+1981  0B0E  23          	inc	hl
+1982  0B0F  77          	ld	(hl), a
+1983  0B10              ;fat/pff.c:867: fmt = 0;							/* Determine the FAT sub type */
+1984  0B10  1E 00       	ld	e,0x00
+1985  0B12              ;fat/pff.c:869: if (PF_FS_FAT16 && mclst >= 0xFF8 && mclst < 0xFFF7) fmt = FS_FAT16;
+1986  0B12  DD 7E FC    	ld	a,(ix-4)
+1987  0B15  D6 F8       	sub	a,0xf8
+1988  0B17  DD 7E FD    	ld	a,(ix-3)
+1989  0B1A  DE 0F       	sbc	a,0x0f
+1990  0B1C  DD 7E FE    	ld	a,(ix-2)
+1991  0B1F  DE 00       	sbc	a,0x00
+1992  0B21  DD 7E FF    	ld	a,(ix-1)
+1993  0B24  DE 00       	sbc	a,0x00
+1994  0B26  38 18       	jr	C,l_pf_mount_00128
+1995  0B28  DD 7E FC    	ld	a,(ix-4)
+1996  0B2B  D6 F7       	sub	a,0xf7
+1997  0B2D  DD 7E FD    	ld	a,(ix-3)
+1998  0B30  DE FF       	sbc	a,0xff
+1999  0B32  DD 7E FE    	ld	a,(ix-2)
+2000  0B35  DE 00       	sbc	a,0x00
+2001  0B37  DD 7E FF    	ld	a,(ix-1)
+2002  0B3A  DE 00       	sbc	a,0x00
+2003  0B3C  30 02       	jr	NC,l_pf_mount_00128
+2004  0B3E  1E 02       	ld	e,0x02
+2005  0B40              ;fat/pff.c:870: if (PF_FS_FAT32 && mclst >= 0xFFF7) fmt = FS_FAT32;
+2006  0B40              l_pf_mount_00128:
+2007  0B40              ;fat/pff.c:871: if (!fmt) return FR_NO_FILESYSTEM;
+2008  0B40  7B          	ld	a, e
+2009  0B41  B7          	or	a, a
+2010  0B42  20 05       	jr	NZ,l_pf_mount_00131
+2011  0B44  2E 06       	ld	l,0x06
+2012  0B46  C3 1B 0C    	jp	l_pf_mount_00137
+2013  0B49              l_pf_mount_00131:
+2014  0B49              ;fat/pff.c:872: fs->fs_type = fmt;
+2015  0B49  7B          	ld	a, e
+2016  0B4A  02          	ld	(bc), a
+2017  0B4B              ;fat/pff.c:877: fs->dirbase = fs->fatbase + fsize;				/* Root directory start sector (lba) */
+2018  0B4B  21 0C 00    	ld	hl,0x000c
+2019  0B4E  09          	add	hl, bc
+2020  0B4F  DD 75 F8    	ld	(ix-8),l
+2021  0B52  DD 74 F9    	ld	(ix-7),h
+2022  0B55  DD 6E F4    	ld	l,(ix-12)
+2023  0B58  DD 66 F5    	ld	h,(ix-11)
+2024  0B5B  5E          	ld	e, (hl)
+2025  0B5C  23          	inc	hl
+2026  0B5D  56          	ld	d, (hl)
+2027  0B5E  23          	inc	hl
+2028  0B5F  23          	inc	hl
+2029  0B60  7E          	ld	a, (hl)
+2030  0B61  2B          	dec	hl
+2031  0B62  6E          	ld	l, (hl)
+2032  0B63  67          	ld	h, a
+2033  0B64  7B          	ld	a, e
+2034  0B65  DD 86 F0    	add	a,(ix-16)
+2035  0B68  DD 77 FC    	ld	(ix-4),a
+2036  0B6B  7A          	ld	a, d
+2037  0B6C  DD 8E F1    	adc	a,(ix-15)
+2038  0B6F  DD 77 FD    	ld	(ix-3),a
+2039  0B72  7D          	ld	a, l
+2040  0B73  DD 8E F2    	adc	a,(ix-14)
+2041  0B76  DD 77 FE    	ld	(ix-2),a
+2042  0B79  7C          	ld	a, h
+2043  0B7A  DD 8E F3    	adc	a,(ix-13)
+2044  0B7D  DD 77 FF    	ld	(ix-1),a
+2045  0B80  C5          	push	bc
+2046  0B81  DD 5E F8    	ld	e,(ix-8)
+2047  0B84  DD 56 F9    	ld	d,(ix-7)
+2048  0B87  21 38 00    	ld	hl,0x0038
+2049  0B8A  39          	add	hl, sp
+2050  0B8B  01 04 00    	ld	bc,0x0004
+2051  0B8E  ED B0       	ldir
+2052  0B90  C1          	pop	bc
+2053  0B91              ;fat/pff.c:879: fs->database = fs->fatbase + fsize + fs->n_rootdir / 16;	/* Data start sector (lba) */
+2054  0B91  21 10 00    	ld	hl,0x0010
+2055  0B94  09          	add	hl, bc
+2056  0B95  DD 75 FE    	ld	(ix-2),l
+2057  0B98  DD 74 FF    	ld	(ix-1),h
+2058  0B9B  DD 6E F4    	ld	l,(ix-12)
+2059  0B9E  DD 66 F5    	ld	h,(ix-11)
+2060  0BA1  5E          	ld	e, (hl)
+2061  0BA2  23          	inc	hl
+2062  0BA3  56          	ld	d, (hl)
+2063  0BA4  23          	inc	hl
+2064  0BA5  23          	inc	hl
+2065  0BA6  7E          	ld	a, (hl)
+2066  0BA7  2B          	dec	hl
+2067  0BA8  6E          	ld	l, (hl)
+2068  0BA9  67          	ld	h, a
+2069  0BAA  7B          	ld	a, e
+2070  0BAB  DD 86 F0    	add	a,(ix-16)
+2071  0BAE  DD 77 F6    	ld	(ix-10),a
+2072  0BB1  7A          	ld	a, d
+2073  0BB2  DD 8E F1    	adc	a,(ix-15)
+2074  0BB5  DD 77 F7    	ld	(ix-9),a
+2075  0BB8  7D          	ld	a, l
+2076  0BB9  DD 8E F2    	adc	a,(ix-14)
+2077  0BBC  DD 77 F8    	ld	(ix-8),a
+2078  0BBF  7C          	ld	a, h
+2079  0BC0  DD 8E F3    	adc	a,(ix-13)
+2080  0BC3  DD 77 F9    	ld	(ix-7),a
+2081  0BC6  DD 6E FA    	ld	l,(ix-6)
+2082  0BC9  DD 66 FB    	ld	h,(ix-5)
+2083  0BCC  5E          	ld	e, (hl)
+2084  0BCD  23          	inc	hl
+2085  0BCE  56          	ld	d, (hl)
+2086  0BCF  CB 3A       	srl	d
+2087  0BD1  CB 1B       	rr	e
+2088  0BD3  CB 3A       	srl	d
+2089  0BD5  CB 1B       	rr	e
+2090  0BD7  CB 3A       	srl	d
+2091  0BD9  CB 1B       	rr	e
+2092  0BDB  CB 3A       	srl	d
+2093  0BDD  CB 1B       	rr	e
+2094  0BDF  2E 00       	ld	l,0x00
+2095  0BE1  26 00       	ld	h,0x00
+2096  0BE3  7B          	ld	a, e
+2097  0BE4  DD 86 F6    	add	a,(ix-10)
+2098  0BE7  DD 77 FA    	ld	(ix-6),a
+2099  0BEA  7A          	ld	a, d
+2100  0BEB  DD 8E F7    	adc	a,(ix-9)
+2101  0BEE  DD 77 FB    	ld	(ix-5),a
+2102  0BF1  7D          	ld	a, l
+2103  0BF2  DD 8E F8    	adc	a,(ix-8)
+2104  0BF5  DD 77 FC    	ld	(ix-4),a
+2105  0BF8  7C          	ld	a, h
+2106  0BF9  DD 8E F9    	adc	a,(ix-7)
+2107  0BFC  DD 77 FD    	ld	(ix-3),a
+2108  0BFF  C5          	push	bc
+2109  0C00  DD 5E FE    	ld	e,(ix-2)
+2110  0C03  DD 56 FF    	ld	d,(ix-1)
+2111  0C06  21 36 00    	ld	hl,0x0036
+2112  0C09  39          	add	hl, sp
+2113  0C0A  01 04 00    	ld	bc,0x0004
+2114  0C0D  ED B0       	ldir
+2115  0C0F  C1          	pop	bc
+2116  0C10              ;fat/pff.c:881: fs->flag = 0;
+2117  0C10  59          	ld	e, c
+2118  0C11  50          	ld	d, b
+2119  0C12  13          	inc	de
+2120  0C13  AF          	xor	a, a
+2121  0C14  12          	ld	(de), a
+2122  0C15              ;fat/pff.c:882: FatFs = fs;
+2123  0C15  ED 43 00 00 	ld	(_FatFs), bc
+2124  0C19              ;fat/pff.c:884: return FR_OK;
+2125  0C19  2E 00       	ld	l,0x00
+2126  0C1B              l_pf_mount_00137:
+2127  0C1B              ;fat/pff.c:885: }
+2128  0C1B  DD F9       	ld	sp, ix
+2129  0C1D  DD E1       	pop	ix
+2130  0C1F  C9          	ret
+2131  0C20              	SECTION code_compiler
+2132  0C20              ;fat/pff.c:894: FRESULT pf_open (
+2133  0C20              ;	---------------------------------
+2134  0C20              ; Function pf_open
+2135  0C20              ; ---------------------------------
+2136  0C20              _pf_open:
+2137  0C20  DD E5       	push	ix
+2138  0C22  DD 21 00 00 	ld	ix,0
+2139  0C26  DD 39       	add	ix,sp
+2140  0C28  21 C2 FF    	ld	hl, -62
+2141  0C2B  39          	add	hl, sp
+2142  0C2C  F9          	ld	sp, hl
+2143  0C2D              ;fat/pff.c:901: FATFS *fs = FatFs;
+2144  0C2D  ED 4B 00 00 	ld	bc, (_FatFs)
+2145  0C31              ;fat/pff.c:904: if (!fs) return FR_NOT_ENABLED;		/* Check file system */
+2146  0C31  78          	ld	a, b
+2147  0C32  B1          	or	a, c
+2148  0C33  20 05       	jr	NZ,l_pf_open_00102
+2149  0C35  2E 05       	ld	l,0x05
+2150  0C37  C3 21 0D    	jp	l_pf_open_00108
+2151  0C3A              l_pf_open_00102:
+2152  0C3A              ;fat/pff.c:906: fs->flag = 0;
+2153  0C3A  21 01 00    	ld	hl,0x0001
+2154  0C3D  09          	add	hl, bc
+2155  0C3E  DD 75 FA    	ld	(ix-6),l
+2156  0C41  DD 74 FB    	ld	(ix-5),h
+2157  0C44  DD 6E FA    	ld	l,(ix-6)
+2158  0C47  DD 66 FB    	ld	h,(ix-5)
+2159  0C4A  36 00       	ld	(hl),0x00
+2160  0C4C              ;fat/pff.c:907: dj.fn = sp;
+2161  0C4C  21 00 00    	ld	hl,0
+2162  0C4F  39          	add	hl, sp
+2163  0C50  EB          	ex	de, hl
+2164  0C51  21 02 00    	ld	hl,0x0002
+2165  0C54  19          	add	hl, de
+2166  0C55  DD 75 FC    	ld	(ix-4),l
+2167  0C58  DD 74 FD    	ld	(ix-3),h
+2168  0C5B  21 0C 00    	ld	hl,12
+2169  0C5E  39          	add	hl, sp
+2170  0C5F  DD 75 FE    	ld	(ix-2),l
+2171  0C62  DD 74 FF    	ld	(ix-1),h
+2172  0C65  DD 6E FC    	ld	l,(ix-4)
+2173  0C68  DD 66 FD    	ld	h,(ix-3)
+2174  0C6B  DD 7E FE    	ld	a,(ix-2)
+2175  0C6E  77          	ld	(hl), a
+2176  0C6F  23          	inc	hl
+2177  0C70  DD 7E FF    	ld	a,(ix-1)
+2178  0C73  77          	ld	(hl), a
+2179  0C74              ;fat/pff.c:908: res = follow_path(&dj, dir, path);	/* Follow the file path */
+2180  0C74  21 18 00    	ld	hl,24
+2181  0C77  39          	add	hl, sp
+2182  0C78  DD 75 FC    	ld	(ix-4),l
+2183  0C7B  DD 74 FD    	ld	(ix-3),h
+2184  0C7E  DD 7E FC    	ld	a,(ix-4)
+2185  0C81  DD 77 FE    	ld	(ix-2),a
+2186  0C84  DD 7E FD    	ld	a,(ix-3)
+2187  0C87  DD 77 FF    	ld	(ix-1),a
+2188  0C8A  C5          	push	bc
+2189  0C8B  DD 6E 04    	ld	l,(ix+4)
+2190  0C8E  DD 66 05    	ld	h,(ix+5)
+2191  0C91  E5          	push	hl
+2192  0C92  DD 6E FE    	ld	l,(ix-2)
+2193  0C95  DD 66 FF    	ld	h,(ix-1)
+2194  0C98  E5          	push	hl
+2195  0C99  D5          	push	de
+2196  0C9A  CD 63 06    	call	_follow_path
+2197  0C9D  F1          	pop	af
+2198  0C9E  F1          	pop	af
+2199  0C9F  F1          	pop	af
+2200  0CA0  7D          	ld	a, l
+2201  0CA1  C1          	pop	bc
+2202  0CA2  6F          	ld	l, a
+2203  0CA3              ;fat/pff.c:909: if (res != FR_OK) return res;		/* Follow failed */
+2204  0CA3  B7          	or	a, a
+2205  0CA4  20 7B       	jr	NZ,l_pf_open_00108
+2206  0CA6              ;fat/pff.c:910: if (!dir[0] || (dir[DIR_Attr] & AM_DIR)) return FR_NO_FILE;	/* It is a directory */
+2207  0CA6  DD 6E FC    	ld	l,(ix-4)
+2208  0CA9  DD 66 FD    	ld	h,(ix-3)
+2209  0CAC  7E          	ld	a, (hl)
+2210  0CAD  B7          	or	a, a
+2211  0CAE  28 0E       	jr	Z,l_pf_open_00105
+2212  0CB0  DD 6E FC    	ld	l,(ix-4)
+2213  0CB3  DD 66 FD    	ld	h,(ix-3)
+2214  0CB6  11 0B 00    	ld	de,0x000b
+2215  0CB9  19          	add	hl, de
+2216  0CBA  CB 66       	bit	4,(hl)
+2217  0CBC  28 04       	jr	Z,l_pf_open_00106
+2218  0CBE              l_pf_open_00105:
+2219  0CBE  2E 03       	ld	l,0x03
+2220  0CC0  18 5F       	jr	l_pf_open_00108
+2221  0CC2              l_pf_open_00106:
+2222  0CC2              ;fat/pff.c:912: fs->org_clust = get_clust(dir);		/* File start cluster */
+2223  0CC2  21 1C 00    	ld	hl,0x001c
+2224  0CC5  09          	add	hl, bc
+2225  0CC6  DD 5E FC    	ld	e,(ix-4)
+2226  0CC9  DD 56 FD    	ld	d,(ix-3)
+2227  0CCC  E5          	push	hl
+2228  0CCD  C5          	push	bc
+2229  0CCE  D5          	push	de
+2230  0CCF  CD B6 02    	call	_get_clust
+2231  0CD2  F1          	pop	af
+2232  0CD3  EB          	ex	de,hl
+2233  0CD4  C1          	pop	bc
+2234  0CD5  E1          	pop	hl
+2235  0CD6  73          	ld	(hl), e
+2236  0CD7  23          	inc	hl
+2237  0CD8  72          	ld	(hl), d
+2238  0CD9              ;fat/pff.c:913: fs->fsize = ld_dword(dir+DIR_FileSize);	/* File size */
+2239  0CD9  21 18 00    	ld	hl,0x0018
+2240  0CDC  09          	add	hl, bc
+2241  0CDD  EB          	ex	de, hl
+2242  0CDE  DD 7E FC    	ld	a,(ix-4)
+2243  0CE1  C6 1C       	add	a,0x1c
+2244  0CE3  6F          	ld	l, a
+2245  0CE4  DD 7E FD    	ld	a,(ix-3)
+2246  0CE7  CE 00       	adc	a,0x00
+2247  0CE9  67          	ld	h, a
+2248  0CEA  C5          	push	bc
+2249  0CEB  D5          	push	de
+2250  0CEC  E5          	push	hl
+2251  0CED  CD 24 00    	call	_ld_dword
+2252  0CF0  F1          	pop	af
+2253  0CF1  DD 75 FC    	ld	(ix-4),l
+2254  0CF4  DD 74 FD    	ld	(ix-3),h
+2255  0CF7  DD 73 FE    	ld	(ix-2),e
+2256  0CFA  DD 72 FF    	ld	(ix-1),d
+2257  0CFD  D1          	pop	de
+2258  0CFE  21 3C 00    	ld	hl,0x003c
+2259  0D01  39          	add	hl, sp
+2260  0D02  01 04 00    	ld	bc,0x0004
+2261  0D05  ED B0       	ldir
+2262  0D07  C1          	pop	bc
+2263  0D08              ;fat/pff.c:914: fs->fptr = 0;						/* File pointer */
+2264  0D08  21 14 00    	ld	hl,0x0014
+2265  0D0B  09          	add	hl, bc
+2266  0D0C  36 00       	ld	(hl),0x00
+2267  0D0E  23          	inc	hl
+2268  0D0F  36 00       	ld	(hl),0x00
+2269  0D11  23          	inc	hl
+2270  0D12  36 00       	ld	(hl),0x00
+2271  0D14  23          	inc	hl
+2272  0D15  36 00       	ld	(hl),0x00
+2273  0D17              ;fat/pff.c:915: fs->flag = FA_OPENED;
+2274  0D17  DD 6E FA    	ld	l,(ix-6)
+2275  0D1A  DD 66 FB    	ld	h,(ix-5)
+2276  0D1D  36 01       	ld	(hl),0x01
+2277  0D1F              ;fat/pff.c:917: return FR_OK;
+2278  0D1F  2E 00       	ld	l,0x00
+2279  0D21              l_pf_open_00108:
+2280  0D21              ;fat/pff.c:918: }
+2281  0D21  DD F9       	ld	sp, ix
+2282  0D23  DD E1       	pop	ix
+2283  0D25  C9          	ret
+2284  0D26              	SECTION code_compiler
+2285  0D26              ;fat/pff.c:928: FRESULT pf_read (
+2286  0D26              ;	---------------------------------
+2287  0D26              ; Function pf_read
+2288  0D26              ; ---------------------------------
+2289  0D26              _pf_read:
+2290  0D26  DD E5       	push	ix
+2291  0D28  DD 21 00 00 	ld	ix,0
+2292  0D2C  DD 39       	add	ix,sp
+2293  0D2E  21 E8 FF    	ld	hl, -24
+2294  0D31  39          	add	hl, sp
+2295  0D32  F9          	ld	sp, hl
+2296  0D33              ;fat/pff.c:938: BYTE cs, *rbuff = buff;
+2297  0D33  DD 7E 04    	ld	a,(ix+4)
+2298  0D36  DD 77 FE    	ld	(ix-2),a
+2299  0D39  DD 7E 05    	ld	a,(ix+5)
+2300  0D3C  DD 77 FF    	ld	(ix-1),a
+2301  0D3F              ;fat/pff.c:939: FATFS *fs = FatFs;
+2302  0D3F  ED 4B 00 00 	ld	bc, (_FatFs)
+2303  0D43              ;fat/pff.c:942: *br = 0;
+2304  0D43  DD 7E 08    	ld	a,(ix+8)
+2305  0D46  DD 77 E8    	ld	(ix-24),a
+2306  0D49  DD 7E 09    	ld	a,(ix+9)
+2307  0D4C  DD 77 E9    	ld	(ix-23),a
+2308  0D4F  E1          	pop	hl
+2309  0D50  E5          	push	hl
+2310  0D51  36 00       	ld	(hl),0x00
+2311  0D53  23          	inc	hl
+2312  0D54  36 00       	ld	(hl),0x00
+2313  0D56              ;fat/pff.c:943: if (!fs) return FR_NOT_ENABLED;		/* Check file system */
+2314  0D56  78          	ld	a, b
+2315  0D57  B1          	or	a, c
+2316  0D58  20 05       	jr	NZ,l_pf_read_00102
+2317  0D5A  2E 05       	ld	l,0x05
+2318  0D5C  C3 EA 0F    	jp	l_pf_read_00127
+2319  0D5F              l_pf_read_00102:
+2320  0D5F              ;fat/pff.c:944: if (!(fs->flag & FA_OPENED)) return FR_NOT_OPENED;	/* Check if opened */
+2321  0D5F  21 01 00    	ld	hl,0x0001
+2322  0D62  09          	add	hl, bc
+2323  0D63  DD 75 EA    	ld	(ix-22),l
+2324  0D66  DD 74 EB    	ld	(ix-21),h
+2325  0D69  DD 6E EA    	ld	l,(ix-22)
+2326  0D6C  DD 66 EB    	ld	h,(ix-21)
+2327  0D6F  7E          	ld	a, (hl)
+2328  0D70  0F          	rrca
+2329  0D71  38 05       	jr	C,l_pf_read_00104
+2330  0D73  2E 04       	ld	l,0x04
+2331  0D75  C3 EA 0F    	jp	l_pf_read_00127
+2332  0D78              l_pf_read_00104:
+2333  0D78              ;fat/pff.c:946: remain = fs->fsize - fs->fptr;
+2334  0D78  69          	ld	l, c
+2335  0D79  60          	ld	h, b
+2336  0D7A  11 18 00    	ld	de,0x0018
+2337  0D7D  19          	add	hl, de
+2338  0D7E  7E          	ld	a, (hl)
+2339  0D7F  DD 77 FA    	ld	(ix-6),a
+2340  0D82  23          	inc	hl
+2341  0D83  7E          	ld	a, (hl)
+2342  0D84  DD 77 FB    	ld	(ix-5),a
+2343  0D87  23          	inc	hl
+2344  0D88  7E          	ld	a, (hl)
+2345  0D89  DD 77 FC    	ld	(ix-4),a
+2346  0D8C  23          	inc	hl
+2347  0D8D  7E          	ld	a, (hl)
+2348  0D8E  DD 77 FD    	ld	(ix-3),a
+2349  0D91  21 14 00    	ld	hl,0x0014
+2350  0D94  09          	add	hl, bc
+2351  0D95  DD 75 EC    	ld	(ix-20),l
+2352  0D98  DD 74 ED    	ld	(ix-19),h
+2353  0D9B  DD 6E EC    	ld	l,(ix-20)
+2354  0D9E  DD 66 ED    	ld	h,(ix-19)
+2355  0DA1  5E          	ld	e, (hl)
+2356  0DA2  23          	inc	hl
+2357  0DA3  56          	ld	d, (hl)
+2358  0DA4  23          	inc	hl
+2359  0DA5  23          	inc	hl
+2360  0DA6  7E          	ld	a, (hl)
+2361  0DA7  2B          	dec	hl
+2362  0DA8  6E          	ld	l, (hl)
+2363  0DA9  67          	ld	h, a
+2364  0DAA  DD 7E FA    	ld	a,(ix-6)
+2365  0DAD  93          	sub	a, e
+2366  0DAE  5F          	ld	e, a
+2367  0DAF  DD 7E FB    	ld	a,(ix-5)
+2368  0DB2  9A          	sbc	a, d
+2369  0DB3  57          	ld	d, a
+2370  0DB4  DD 7E FC    	ld	a,(ix-4)
+2371  0DB7  9D          	sbc	a, l
+2372  0DB8  6F          	ld	l, a
+2373  0DB9  DD 7E FD    	ld	a,(ix-3)
+2374  0DBC  9C          	sbc	a, h
+2375  0DBD  67          	ld	h, a
+2376  0DBE  DD 73 FA    	ld	(ix-6),e
+2377  0DC1  DD 72 FB    	ld	(ix-5),d
+2378  0DC4  DD 75 FC    	ld	(ix-4),l
+2379  0DC7  DD 74 FD    	ld	(ix-3),h
+2380  0DCA              ;fat/pff.c:947: if (btr > remain) btr = (UINT)remain;			/* Truncate btr by remaining bytes */
+2381  0DCA  DD 5E 06    	ld	e,(ix+6)
+2382  0DCD  DD 56 07    	ld	d,(ix+7)
+2383  0DD0  2E 00       	ld	l,0x00
+2384  0DD2  26 00       	ld	h,0x00
+2385  0DD4  DD 7E FA    	ld	a,(ix-6)
+2386  0DD7  93          	sub	a, e
+2387  0DD8  DD 7E FB    	ld	a,(ix-5)
+2388  0DDB  9A          	sbc	a, d
+2389  0DDC  DD 7E FC    	ld	a,(ix-4)
+2390  0DDF  9D          	sbc	a, l
+2391  0DE0  DD 7E FD    	ld	a,(ix-3)
+2392  0DE3  9C          	sbc	a, h
+2393  0DE4  30 0C       	jr	NC,l_pf_read_00140
+2394  0DE6  DD 7E FA    	ld	a,(ix-6)
+2395  0DE9  DD 77 06    	ld	(ix+6),a
+2396  0DEC  DD 7E FB    	ld	a,(ix-5)
+2397  0DEF  DD 77 07    	ld	(ix+7),a
+2398  0DF2              ;fat/pff.c:949: while (btr)	{									/* Repeat until all data transferred */
+2399  0DF2              l_pf_read_00140:
+2400  0DF2  21 1E 00    	ld	hl,0x001e
+2401  0DF5  09          	add	hl, bc
+2402  0DF6  DD 75 EE    	ld	(ix-18),l
+2403  0DF9  DD 74 EF    	ld	(ix-17),h
+2404  0DFC  DD 71 F0    	ld	(ix-16),c
+2405  0DFF  DD 70 F1    	ld	(ix-15),b
+2406  0E02  DD 71 F2    	ld	(ix-14),c
+2407  0E05  DD 70 F3    	ld	(ix-13),b
+2408  0E08  21 20 00    	ld	hl,0x0020
+2409  0E0B  09          	add	hl, bc
+2410  0E0C  DD 75 F4    	ld	(ix-12),l
+2411  0E0F  DD 74 F5    	ld	(ix-11),h
+2412  0E12              l_pf_read_00124:
+2413  0E12  DD 7E 07    	ld	a,(ix+7)
+2414  0E15  DD B6 06    	or	a,(ix+6)
+2415  0E18  CA E8 0F    	jp	Z, l_pf_read_00126
+2416  0E1B              ;fat/pff.c:950: if ((fs->fptr % 512) == 0) {				/* On the sector boundary? */
+2417  0E1B  DD 6E EC    	ld	l,(ix-20)
+2418  0E1E  DD 66 ED    	ld	h,(ix-19)
+2419  0E21  4E          	ld	c, (hl)
+2420  0E22  23          	inc	hl
+2421  0E23  46          	ld	b, (hl)
+2422  0E24  23          	inc	hl
+2423  0E25  5E          	ld	e, (hl)
+2424  0E26  23          	inc	hl
+2425  0E27  56          	ld	d, (hl)
+2426  0E28  79          	ld	a, c
+2427  0E29  B7          	or	a, a
+2428  0E2A  C2 01 0F    	jp	NZ,l_pf_read_00117
+2429  0E2D  CB 40       	bit	0, b
+2430  0E2F  C2 01 0F    	jp	NZ,l_pf_read_00117
+2431  0E32              ;fat/pff.c:951: cs = (BYTE)(fs->fptr / 512 & (fs->csize - 1));	/* Sector offset in the cluster */
+2432  0E32  DD 70 FA    	ld	(ix-6),b
+2433  0E35  DD 73 FB    	ld	(ix-5),e
+2434  0E38  DD 72 FC    	ld	(ix-4),d
+2435  0E3B  DD 36 FD 00 	ld	(ix-3),0x00
+2436  0E3F  DD CB FC 3E 	srl	(ix-4)
+2437  0E43  DD CB FB 1E 	rr	(ix-5)
+2438  0E47  DD CB FA 1E 	rr	(ix-6)
+2439  0E4B  DD 6E F2    	ld	l,(ix-14)
+2440  0E4E  DD 66 F3    	ld	h,(ix-13)
+2441  0E51  23          	inc	hl
+2442  0E52  23          	inc	hl
+2443  0E53  6E          	ld	l, (hl)
+2444  0E54  2D          	dec	l
+2445  0E55  DD 7E FA    	ld	a,(ix-6)
+2446  0E58  A5          	and	a, l
+2447  0E59  DD 77 F9    	ld	(ix-7),a
+2448  0E5C              ;fat/pff.c:952: if (!cs) {								/* On the cluster boundary? */
+2449  0E5C  B7          	or	a, a
+2450  0E5D  20 4D       	jr	NZ,l_pf_read_00113
+2451  0E5F              ;fat/pff.c:953: if (fs->fptr == 0) {				/* On the top of the file? */
+2452  0E5F  7A          	ld	a, d
+2453  0E60  B3          	or	a, e
+2454  0E61  B0          	or	a, b
+2455  0E62  B1          	or	a, c
+2456  0E63  20 0F       	jr	NZ,l_pf_read_00108
+2457  0E65              ;fat/pff.c:954: clst = fs->org_clust;
+2458  0E65  DD 6E F0    	ld	l,(ix-16)
+2459  0E68  DD 66 F1    	ld	h,(ix-15)
+2460  0E6B  11 1C 00    	ld	de,0x001c
+2461  0E6E  19          	add	hl, de
+2462  0E6F  4E          	ld	c, (hl)
+2463  0E70  23          	inc	hl
+2464  0E71  46          	ld	b, (hl)
+2465  0E72  18 1C       	jr	l_pf_read_00109
+2466  0E74              l_pf_read_00108:
+2467  0E74              ;fat/pff.c:956: clst = get_fat(fs->curr_clust);
+2468  0E74  DD 6E EE    	ld	l,(ix-18)
+2469  0E77  DD 66 EF    	ld	h,(ix-17)
+2470  0E7A  7E          	ld	a, (hl)
+2471  0E7B  DD 77 FC    	ld	(ix-4),a
+2472  0E7E  23          	inc	hl
+2473  0E7F  7E          	ld	a, (hl)
+2474  0E80  DD 77 FD    	ld	(ix-3),a
+2475  0E83  DD 6E FC    	ld	l,(ix-4)
+2476  0E86  DD 66 FD    	ld	h,(ix-3)
+2477  0E89  E5          	push	hl
+2478  0E8A  CD 53 01    	call	_get_fat
+2479  0E8D  F1          	pop	af
+2480  0E8E  4D          	ld	c, l
+2481  0E8F  44          	ld	b, h
+2482  0E90              l_pf_read_00109:
+2483  0E90              ;fat/pff.c:958: if (clst <= 1) ABORT(FR_DISK_ERR);
+2484  0E90  3E 01       	ld	a,0x01
+2485  0E92  B9          	cp	a, c
+2486  0E93  3E 00       	ld	a,0x00
+2487  0E95  98          	sbc	a, b
+2488  0E96  38 0B       	jr	C,l_pf_read_00111
+2489  0E98  C1          	pop	bc
+2490  0E99  E1          	pop	hl
+2491  0E9A  E5          	push	hl
+2492  0E9B  C5          	push	bc
+2493  0E9C  36 00       	ld	(hl),0x00
+2494  0E9E  2E 01       	ld	l,0x01
+2495  0EA0  C3 EA 0F    	jp	l_pf_read_00127
+2496  0EA3              l_pf_read_00111:
+2497  0EA3              ;fat/pff.c:959: fs->curr_clust = clst;				/* Update current cluster */
+2498  0EA3  DD 6E EE    	ld	l,(ix-18)
+2499  0EA6  DD 66 EF    	ld	h,(ix-17)
+2500  0EA9  71          	ld	(hl), c
+2501  0EAA  23          	inc	hl
+2502  0EAB  70          	ld	(hl), b
+2503  0EAC              l_pf_read_00113:
+2504  0EAC              ;fat/pff.c:961: sect = clust2sect(fs->curr_clust);		/* Get current sector */
+2505  0EAC  DD 6E EE    	ld	l,(ix-18)
+2506  0EAF  DD 66 EF    	ld	h,(ix-17)
+2507  0EB2  4E          	ld	c, (hl)
+2508  0EB3  23          	inc	hl
+2509  0EB4  46          	ld	b, (hl)
+2510  0EB5  C5          	push	bc
+2511  0EB6  CD 17 02    	call	_clust2sect
+2512  0EB9  F1          	pop	af
+2513  0EBA  DD 75 FA    	ld	(ix-6),l
+2514  0EBD  DD 74 FB    	ld	(ix-5),h
+2515  0EC0  DD 73 FC    	ld	(ix-4),e
+2516  0EC3  DD 72 FD    	ld	(ix-3),d
+2517  0EC6              ;fat/pff.c:962: if (!sect) ABORT(FR_DISK_ERR);
+2518  0EC6  7A          	ld	a, d
+2519  0EC7  B3          	or	a, e
+2520  0EC8  B4          	or	a, h
+2521  0EC9  B5          	or	a, l
+2522  0ECA  20 0B       	jr	NZ,l_pf_read_00115
+2523  0ECC  C1          	pop	bc
+2524  0ECD  E1          	pop	hl
+2525  0ECE  E5          	push	hl
+2526  0ECF  C5          	push	bc
+2527  0ED0  36 00       	ld	(hl),0x00
+2528  0ED2  2E 01       	ld	l,0x01
+2529  0ED4  C3 EA 0F    	jp	l_pf_read_00127
+2530  0ED7              l_pf_read_00115:
+2531  0ED7              ;fat/pff.c:963: fs->dsect = sect + cs;
+2532  0ED7  DD 4E F9    	ld	c,(ix-7)
+2533  0EDA  06 00       	ld	b,0x00
+2534  0EDC  1E 00       	ld	e,0x00
+2535  0EDE  16 00       	ld	d,0x00
+2536  0EE0  DD 7E FA    	ld	a,(ix-6)
+2537  0EE3  81          	add	a, c
+2538  0EE4  4F          	ld	c, a
+2539  0EE5  DD 7E FB    	ld	a,(ix-5)
+2540  0EE8  88          	adc	a, b
+2541  0EE9  47          	ld	b, a
+2542  0EEA  DD 7E FC    	ld	a,(ix-4)
+2543  0EED  8B          	adc	a, e
+2544  0EEE  5F          	ld	e, a
+2545  0EEF  DD 7E FD    	ld	a,(ix-3)
+2546  0EF2  8A          	adc	a, d
+2547  0EF3  57          	ld	d, a
+2548  0EF4  DD 6E F4    	ld	l,(ix-12)
+2549  0EF7  DD 66 F5    	ld	h,(ix-11)
+2550  0EFA  71          	ld	(hl), c
+2551  0EFB  23          	inc	hl
+2552  0EFC  70          	ld	(hl), b
+2553  0EFD  23          	inc	hl
+2554  0EFE  73          	ld	(hl), e
+2555  0EFF  23          	inc	hl
+2556  0F00  72          	ld	(hl), d
+2557  0F01              l_pf_read_00117:
+2558  0F01              ;fat/pff.c:946: remain = fs->fsize - fs->fptr;
+2559  0F01  DD 6E EC    	ld	l,(ix-20)
+2560  0F04  DD 66 ED    	ld	h,(ix-19)
+2561  0F07  4E          	ld	c, (hl)
+2562  0F08  23          	inc	hl
+2563  0F09  7E          	ld	a, (hl)
+2564  0F0A              ;fat/pff.c:965: rcnt = 512 - (UINT)fs->fptr % 512;			/* Get partial sector data from sector buffer */
+2565  0F0A  E6 01       	and	a,0x01
+2566  0F0C  47          	ld	b, a
+2567  0F0D  AF          	xor	a, a
+2568  0F0E  91          	sub	a, c
+2569  0F0F  5F          	ld	e, a
+2570  0F10  3E 02       	ld	a,0x02
+2571  0F12  98          	sbc	a, b
+2572  0F13  57          	ld	d, a
+2573  0F14              ;fat/pff.c:966: if (rcnt > btr) rcnt = btr;
+2574  0F14  DD 7E 06    	ld	a,(ix+6)
+2575  0F17  93          	sub	a, e
+2576  0F18  DD 7E 07    	ld	a,(ix+7)
+2577  0F1B  9A          	sbc	a, d
+2578  0F1C  30 06       	jr	NC,l_pf_read_00119
+2579  0F1E  DD 5E 06    	ld	e,(ix+6)
+2580  0F21  DD 56 07    	ld	d,(ix+7)
+2581  0F24              l_pf_read_00119:
+2582  0F24              ;fat/pff.c:967: dr = disk_readp(rbuff, fs->dsect, (UINT)fs->fptr % 512, rcnt);
+2583  0F24  D5          	push	de
+2584  0F25  C5          	push	bc
+2585  0F26  DD 5E F4    	ld	e,(ix-12)
+2586  0F29  DD 56 F5    	ld	d,(ix-11)
+2587  0F2C  21 16 00    	ld	hl,0x0016
+2588  0F2F  39          	add	hl, sp
+2589  0F30  EB          	ex	de, hl
+2590  0F31  01 04 00    	ld	bc,0x0004
+2591  0F34  ED B0       	ldir
+2592  0F36  C1          	pop	bc
+2593  0F37  D1          	pop	de
+2594  0F38  D5          	push	de
+2595  0F39  D5          	push	de
+2596  0F3A  C5          	push	bc
+2597  0F3B  DD 6E FC    	ld	l,(ix-4)
+2598  0F3E  DD 66 FD    	ld	h,(ix-3)
+2599  0F41  E5          	push	hl
+2600  0F42  DD 6E FA    	ld	l,(ix-6)
+2601  0F45  DD 66 FB    	ld	h,(ix-5)
+2602  0F48  E5          	push	hl
+2603  0F49  DD 6E FE    	ld	l,(ix-2)
+2604  0F4C  DD 66 FF    	ld	h,(ix-1)
+2605  0F4F  E5          	push	hl
+2606  0F50  CD 00 00    	call	_disk_readp
+2607  0F53  FD 21 0A 00 	ld	iy,10
+2608  0F57  FD 39       	add	iy, sp
+2609  0F59  FD F9       	ld	sp, iy
+2610  0F5B  7D          	ld	a, l
+2611  0F5C  D1          	pop	de
+2612  0F5D              ;fat/pff.c:968: if (dr) ABORT(FR_DISK_ERR);
+2613  0F5D  B7          	or	a, a
+2614  0F5E  28 0B       	jr	Z,l_pf_read_00121
+2615  0F60  C1          	pop	bc
+2616  0F61  E1          	pop	hl
+2617  0F62  E5          	push	hl
+2618  0F63  C5          	push	bc
+2619  0F64  36 00       	ld	(hl),0x00
+2620  0F66  2E 01       	ld	l,0x01
+2621  0F68  C3 EA 0F    	jp	l_pf_read_00127
+2622  0F6B              l_pf_read_00121:
+2623  0F6B              ;fat/pff.c:969: fs->fptr += rcnt;							/* Advances file read pointer */
+2624  0F6B  D5          	push	de
+2625  0F6C  DD 5E EC    	ld	e,(ix-20)
+2626  0F6F  DD 56 ED    	ld	d,(ix-19)
+2627  0F72  21 10 00    	ld	hl,0x0010
+2628  0F75  39          	add	hl, sp
+2629  0F76  EB          	ex	de, hl
+2630  0F77  01 04 00    	ld	bc,0x0004
+2631  0F7A  ED B0       	ldir
+2632  0F7C  D1          	pop	de
+2633  0F7D  4B          	ld	c, e
+2634  0F7E  42          	ld	b, d
+2635  0F7F  2E 00       	ld	l,0x00
+2636  0F81  26 00       	ld	h,0x00
+2637  0F83  79          	ld	a, c
+2638  0F84  DD 86 F6    	add	a,(ix-10)
+2639  0F87  DD 77 FA    	ld	(ix-6),a
+2640  0F8A  78          	ld	a, b
+2641  0F8B  DD 8E F7    	adc	a,(ix-9)
+2642  0F8E  DD 77 FB    	ld	(ix-5),a
+2643  0F91  7D          	ld	a, l
+2644  0F92  DD 8E F8    	adc	a,(ix-8)
+2645  0F95  DD 77 FC    	ld	(ix-4),a
+2646  0F98  7C          	ld	a, h
+2647  0F99  DD 8E F9    	adc	a,(ix-7)
+2648  0F9C  DD 77 FD    	ld	(ix-3),a
+2649  0F9F  D5          	push	de
+2650  0FA0  DD 5E EC    	ld	e,(ix-20)
+2651  0FA3  DD 56 ED    	ld	d,(ix-19)
+2652  0FA6  21 14 00    	ld	hl,0x0014
+2653  0FA9  39          	add	hl, sp
+2654  0FAA  01 04 00    	ld	bc,0x0004
+2655  0FAD  ED B0       	ldir
+2656  0FAF  D1          	pop	de
+2657  0FB0              ;fat/pff.c:970: btr -= rcnt; *br += rcnt;					/* Update read counter */
+2658  0FB0  DD 7E 06    	ld	a,(ix+6)
+2659  0FB3  93          	sub	a, e
+2660  0FB4  DD 77 06    	ld	(ix+6),a
+2661  0FB7  DD 7E 07    	ld	a,(ix+7)
+2662  0FBA  9A          	sbc	a, d
+2663  0FBB  DD 77 07    	ld	(ix+7),a
+2664  0FBE  E1          	pop	hl
+2665  0FBF  E5          	push	hl
+2666  0FC0  4E          	ld	c, (hl)
+2667  0FC1  23          	inc	hl
+2668  0FC2  46          	ld	b, (hl)
+2669  0FC3  79          	ld	a, c
+2670  0FC4  83          	add	a, e
+2671  0FC5  4F          	ld	c, a
+2672  0FC6  78          	ld	a, b
+2673  0FC7  8A          	adc	a, d
+2674  0FC8  47          	ld	b, a
+2675  0FC9  E1          	pop	hl
+2676  0FCA  E5          	push	hl
+2677  0FCB  71          	ld	(hl), c
+2678  0FCC  23          	inc	hl
+2679  0FCD  70          	ld	(hl), b
+2680  0FCE              ;fat/pff.c:971: if (rbuff) rbuff += rcnt;					/* Advances the data pointer if destination is memory */
+2681  0FCE  DD 7E FF    	ld	a,(ix-1)
+2682  0FD1  DD B6 FE    	or	a,(ix-2)
+2683  0FD4  CA 12 0E    	jp	Z, l_pf_read_00124
+2684  0FD7  7B          	ld	a, e
+2685  0FD8  DD 86 FE    	add	a,(ix-2)
+2686  0FDB  DD 77 FE    	ld	(ix-2),a
+2687  0FDE  7A          	ld	a, d
+2688  0FDF  DD 8E FF    	adc	a,(ix-1)
+2689  0FE2  DD 77 FF    	ld	(ix-1),a
+2690  0FE5  C3 12 0E    	jp	l_pf_read_00124
+2691  0FE8              l_pf_read_00126:
+2692  0FE8              ;fat/pff.c:974: return FR_OK;
+2693  0FE8  2E 00       	ld	l,0x00
+2694  0FEA              l_pf_read_00127:
+2695  0FEA              ;fat/pff.c:975: }
+2696  0FEA  DD F9       	ld	sp, ix
+2697  0FEC  DD E1       	pop	ix
+2698  0FEE  C9          	ret
+2699  0FEF              	SECTION code_compiler
+2700  0FEF              ;fat/pff.c:985: FRESULT pf_write (
+2701  0FEF              ;	---------------------------------
+2702  0FEF              ; Function pf_write
+2703  0FEF              ; ---------------------------------
+2704  0FEF              _pf_write:
+2705  0FEF  DD E5       	push	ix
+2706  0FF1  DD 21 00 00 	ld	ix,0
+2707  0FF5  DD 39       	add	ix,sp
+2708  0FF7  21 E5 FF    	ld	hl, -27
+2709  0FFA  39          	add	hl, sp
+2710  0FFB  F9          	ld	sp, hl
+2711  0FFC              ;fat/pff.c:993: const BYTE *p = buff;
+2712  0FFC  DD 7E 04    	ld	a,(ix+4)
+2713  0FFF  DD 77 FE    	ld	(ix-2),a
+2714  1002  DD 7E 05    	ld	a,(ix+5)
+2715  1005  DD 77 FF    	ld	(ix-1),a
+2716  1008              ;fat/pff.c:996: FATFS *fs = FatFs;
+2717  1008  2A 00 00    	ld	hl, (_FatFs)
+2718  100B  DD 75 E9    	ld	(ix-23),l
+2719  100E  DD 74 EA    	ld	(ix-22),h
+2720  1011              ;fat/pff.c:999: *bw = 0;
+2721  1011  DD 7E 08    	ld	a,(ix+8)
+2722  1014  DD 77 EB    	ld	(ix-21),a
+2723  1017  DD 7E 09    	ld	a,(ix+9)
+2724  101A  DD 77 EC    	ld	(ix-20),a
+2725  101D  DD 6E EB    	ld	l,(ix-21)
+2726  1020  DD 66 EC    	ld	h,(ix-20)
+2727  1023  36 00       	ld	(hl),0x00
+2728  1025  23          	inc	hl
+2729  1026  36 00       	ld	(hl),0x00
+2730  1028              ;fat/pff.c:1000: if (!fs) return FR_NOT_ENABLED;		/* Check file system */
+2731  1028  DD 7E EA    	ld	a,(ix-22)
+2732  102B  DD B6 E9    	or	a,(ix-23)
+2733  102E  20 05       	jr	NZ,l_pf_write_00102
+2734  1030  2E 05       	ld	l,0x05
+2735  1032  C3 D5 13    	jp	l_pf_write_00139
+2736  1035              l_pf_write_00102:
+2737  1035              ;fat/pff.c:1001: if (!(fs->flag & FA_OPENED)) return FR_NOT_OPENED;	/* Check if opened */
+2738  1035  DD 7E E9    	ld	a,(ix-23)
+2739  1038  C6 01       	add	a,0x01
+2740  103A  DD 77 ED    	ld	(ix-19),a
+2741  103D  DD 7E EA    	ld	a,(ix-22)
+2742  1040  CE 00       	adc	a,0x00
+2743  1042  DD 77 EE    	ld	(ix-18),a
+2744  1045  DD 6E ED    	ld	l,(ix-19)
+2745  1048  DD 66 EE    	ld	h,(ix-18)
+2746  104B  4E          	ld	c, (hl)
+2747  104C  CB 41       	bit	0, c
+2748  104E  20 05       	jr	NZ,l_pf_write_00104
+2749  1050  2E 04       	ld	l,0x04
+2750  1052  C3 D5 13    	jp	l_pf_write_00139
+2751  1055              l_pf_write_00104:
+2752  1055              ;fat/pff.c:1004: if ((fs->flag & FA__WIP) && disk_writep(0, 0)) ABORT(FR_DISK_ERR);
+2753  1055  79          	ld	a, c
+2754  1056  E6 40       	and	a,0x40
+2755  1058  4F          	ld	c, a
+2756  1059  06 00       	ld	b,0x00
+2757  105B              ;fat/pff.c:1003: if (!btw) {		/* Finalize request */
+2758  105B  DD 7E 07    	ld	a,(ix+7)
+2759  105E  DD B6 06    	or	a,(ix+6)
+2760  1061  20 3B       	jr	NZ,l_pf_write_00111
+2761  1063              ;fat/pff.c:1004: if ((fs->flag & FA__WIP) && disk_writep(0, 0)) ABORT(FR_DISK_ERR);
+2762  1063  78          	ld	a, b
+2763  1064  B1          	or	a, c
+2764  1065  28 22       	jr	Z,l_pf_write_00106
+2765  1067  21 00 00    	ld	hl,0x0000
+2766  106A  E5          	push	hl
+2767  106B  21 00 00    	ld	hl,0x0000
+2768  106E  E5          	push	hl
+2769  106F  2E 00       	ld	l,0x00
+2770  1071  E5          	push	hl
+2771  1072  CD 00 00    	call	_disk_writep
+2772  1075  F1          	pop	af
+2773  1076  F1          	pop	af
+2774  1077  F1          	pop	af
+2775  1078  7D          	ld	a, l
+2776  1079  B7          	or	a, a
+2777  107A  28 0D       	jr	Z,l_pf_write_00106
+2778  107C  DD 6E ED    	ld	l,(ix-19)
+2779  107F  DD 66 EE    	ld	h,(ix-18)
+2780  1082  36 00       	ld	(hl),0x00
+2781  1084  2E 01       	ld	l,0x01
+2782  1086  C3 D5 13    	jp	l_pf_write_00139
+2783  1089              l_pf_write_00106:
+2784  1089              ;fat/pff.c:1005: fs->flag &= ~FA__WIP;
+2785  1089  DD 6E ED    	ld	l,(ix-19)
+2786  108C  DD 66 EE    	ld	h,(ix-18)
+2787  108F  7E          	ld	a, (hl)
+2788  1090  CB B7       	res	6, a
+2789  1092  DD 6E ED    	ld	l,(ix-19)
+2790  1095  DD 66 EE    	ld	h,(ix-18)
+2791  1098  77          	ld	(hl), a
+2792  1099              ;fat/pff.c:1006: return FR_OK;
+2793  1099  2E 00       	ld	l,0x00
+2794  109B  C3 D5 13    	jp	l_pf_write_00139
+2795  109E              l_pf_write_00111:
+2796  109E              ;fat/pff.c:1009: fs->fptr &= 0xFFFFFE00;
+2797  109E  DD 7E E9    	ld	a,(ix-23)
+2798  10A1  C6 14       	add	a,0x14
+2799  10A3  DD 77 FC    	ld	(ix-4),a
+2800  10A6  DD 7E EA    	ld	a,(ix-22)
+2801  10A9  CE 00       	adc	a,0x00
+2802  10AB  DD 77 FD    	ld	(ix-3),a
+2803  10AE              ;fat/pff.c:1008: if (!(fs->flag & FA__WIP)) {	/* Round-down fptr to the sector boundary */
+2804  10AE  78          	ld	a, b
+2805  10AF  B1          	or	a, c
+2806  10B0  20 37       	jr	NZ,l_pf_write_00112
+2807  10B2              ;fat/pff.c:1009: fs->fptr &= 0xFFFFFE00;
+2808  10B2  DD 5E FC    	ld	e,(ix-4)
+2809  10B5  DD 56 FD    	ld	d,(ix-3)
+2810  10B8  21 0F 00    	ld	hl,0x000f
+2811  10BB  39          	add	hl, sp
+2812  10BC  EB          	ex	de, hl
+2813  10BD  01 04 00    	ld	bc,0x0004
+2814  10C0  ED B0       	ldir
+2815  10C2  DD 36 F8 00 	ld	(ix-8),0x00
+2816  10C6  DD 7E F5    	ld	a,(ix-11)
+2817  10C9  E6 FE       	and	a,0xfe
+2818  10CB  DD 77 F9    	ld	(ix-7),a
+2819  10CE  DD 7E F6    	ld	a,(ix-10)
+2820  10D1  DD 77 FA    	ld	(ix-6),a
+2821  10D4  DD 7E F7    	ld	a,(ix-9)
+2822  10D7  DD 77 FB    	ld	(ix-5),a
+2823  10DA  DD 5E FC    	ld	e,(ix-4)
+2824  10DD  DD 56 FD    	ld	d,(ix-3)
+2825  10E0  21 13 00    	ld	hl,0x0013
+2826  10E3  39          	add	hl, sp
+2827  10E4  01 04 00    	ld	bc,0x0004
+2828  10E7  ED B0       	ldir
+2829  10E9              l_pf_write_00112:
+2830  10E9              ;fat/pff.c:1012: remain = fs->fsize - fs->fptr;
+2831  10E9  DD 6E E9    	ld	l,(ix-23)
+2832  10EC  DD 66 EA    	ld	h,(ix-22)
+2833  10EF  11 18 00    	ld	de,0x0018
+2834  10F2  19          	add	hl, de
+2835  10F3  4E          	ld	c, (hl)
+2836  10F4  23          	inc	hl
+2837  10F5  46          	ld	b, (hl)
+2838  10F6  23          	inc	hl
+2839  10F7  5E          	ld	e, (hl)
+2840  10F8  23          	inc	hl
+2841  10F9  56          	ld	d, (hl)
+2842  10FA  DD 7E FC    	ld	a,(ix-4)
+2843  10FD  DD 77 EF    	ld	(ix-17),a
+2844  1100  DD 7E FD    	ld	a,(ix-3)
+2845  1103  DD 77 F0    	ld	(ix-16),a
+2846  1106  D5          	push	de
+2847  1107  C5          	push	bc
+2848  1108  DD 5E FC    	ld	e,(ix-4)
+2849  110B  DD 56 FD    	ld	d,(ix-3)
+2850  110E  21 19 00    	ld	hl,0x0019
+2851  1111  39          	add	hl, sp
+2852  1112  EB          	ex	de, hl
+2853  1113  01 04 00    	ld	bc,0x0004
+2854  1116  ED B0       	ldir
+2855  1118  C1          	pop	bc
+2856  1119  D1          	pop	de
+2857  111A  79          	ld	a, c
+2858  111B  DD 96 FA    	sub	a,(ix-6)
+2859  111E  4F          	ld	c, a
+2860  111F  78          	ld	a, b
+2861  1120  DD 9E FB    	sbc	a,(ix-5)
+2862  1123  47          	ld	b, a
+2863  1124  7B          	ld	a, e
+2864  1125  DD 9E FC    	sbc	a,(ix-4)
+2865  1128  5F          	ld	e, a
+2866  1129  7A          	ld	a, d
+2867  112A  DD 9E FD    	sbc	a,(ix-3)
+2868  112D  57          	ld	d, a
+2869  112E              ;fat/pff.c:1013: if (btw > remain) btw = (UINT)remain;			/* Truncate btw by remaining bytes */
+2870  112E  DD 7E 06    	ld	a,(ix+6)
+2871  1131  DD 77 FA    	ld	(ix-6),a
+2872  1134  DD 7E 07    	ld	a,(ix+7)
+2873  1137  DD 77 FB    	ld	(ix-5),a
+2874  113A  DD 36 FC 00 	ld	(ix-4),0x00
+2875  113E  DD 36 FD 00 	ld	(ix-3),0x00
+2876  1142  79          	ld	a, c
+2877  1143  DD 96 FA    	sub	a,(ix-6)
+2878  1146  78          	ld	a, b
+2879  1147  DD 9E FB    	sbc	a,(ix-5)
+2880  114A  7B          	ld	a, e
+2881  114B  DD 9E FC    	sbc	a,(ix-4)
+2882  114E  7A          	ld	a, d
+2883  114F  DD 9E FD    	sbc	a,(ix-3)
+2884  1152  30 06       	jr	NC,l_pf_write_00157
+2885  1154  DD 71 06    	ld	(ix+6),c
+2886  1157  DD 70 07    	ld	(ix+7),b
+2887  115A              ;fat/pff.c:1015: while (btw)	{									/* Repeat until all data transferred */
+2888  115A              l_pf_write_00157:
+2889  115A  DD 7E E9    	ld	a,(ix-23)
+2890  115D  C6 1E       	add	a,0x1e
+2891  115F  DD 77 F1    	ld	(ix-15),a
+2892  1162  DD 7E EA    	ld	a,(ix-22)
+2893  1165  CE 00       	adc	a,0x00
+2894  1167  DD 77 F2    	ld	(ix-14),a
+2895  116A  DD 7E E9    	ld	a,(ix-23)
+2896  116D  DD 77 F3    	ld	(ix-13),a
+2897  1170  DD 7E EA    	ld	a,(ix-22)
+2898  1173  DD 77 F4    	ld	(ix-12),a
+2899  1176  DD 7E E9    	ld	a,(ix-23)
+2900  1179  DD 77 F5    	ld	(ix-11),a
+2901  117C  DD 7E EA    	ld	a,(ix-22)
+2902  117F  DD 77 F6    	ld	(ix-10),a
+2903  1182              l_pf_write_00136:
+2904  1182  DD 7E 07    	ld	a,(ix+7)
+2905  1185  DD B6 06    	or	a,(ix+6)
+2906  1188  CA D3 13    	jp	Z, l_pf_write_00138
+2907  118B              ;fat/pff.c:1016: if ((UINT)fs->fptr % 512 == 0) {			/* On the sector boundary? */
+2908  118B  DD 6E EF    	ld	l,(ix-17)
+2909  118E  DD 66 F0    	ld	h,(ix-16)
+2910  1191  4E          	ld	c, (hl)
+2911  1192  23          	inc	hl
+2912  1193  46          	ld	b, (hl)
+2913  1194  23          	inc	hl
+2914  1195  5E          	ld	e, (hl)
+2915  1196  23          	inc	hl
+2916  1197  56          	ld	d, (hl)
+2917  1198  69          	ld	l, c
+2918  1199  60          	ld	h, b
+2919  119A  7D          	ld	a, l
+2920  119B  B7          	or	a, a
+2921  119C  C2 A8 12    	jp	NZ,l_pf_write_00127
+2922  119F  CB 44       	bit	0, h
+2923  11A1  C2 A8 12    	jp	NZ,l_pf_write_00127
+2924  11A4              ;fat/pff.c:1017: cs = (BYTE)(fs->fptr / 512 & (fs->csize - 1));	/* Sector offset in the cluster */
+2925  11A4  DD 70 FA    	ld	(ix-6),b
+2926  11A7  DD 73 FB    	ld	(ix-5),e
+2927  11AA  DD 72 FC    	ld	(ix-4),d
+2928  11AD  DD 36 FD 00 	ld	(ix-3),0x00
+2929  11B1  DD CB FC 3E 	srl	(ix-4)
+2930  11B5  DD CB FB 1E 	rr	(ix-5)
+2931  11B9  DD CB FA 1E 	rr	(ix-6)
+2932  11BD  DD 6E F5    	ld	l,(ix-11)
+2933  11C0  DD 66 F6    	ld	h,(ix-10)
+2934  11C3  23          	inc	hl
+2935  11C4  23          	inc	hl
+2936  11C5  6E          	ld	l, (hl)
+2937  11C6  2D          	dec	l
+2938  11C7  DD 7E FA    	ld	a,(ix-6)
+2939  11CA  A5          	and	a, l
+2940  11CB  DD 77 F7    	ld	(ix-9),a
+2941  11CE              ;fat/pff.c:1018: if (!cs) {								/* On the cluster boundary? */
+2942  11CE  B7          	or	a, a
+2943  11CF  20 43       	jr	NZ,l_pf_write_00121
+2944  11D1              ;fat/pff.c:1019: if (fs->fptr == 0) {				/* On the top of the file? */
+2945  11D1  7A          	ld	a, d
+2946  11D2  B3          	or	a, e
+2947  11D3  B0          	or	a, b
+2948  11D4  B1          	or	a, c
+2949  11D5  20 0F       	jr	NZ,l_pf_write_00116
+2950  11D7              ;fat/pff.c:1020: clst = fs->org_clust;
+2951  11D7  DD 6E F3    	ld	l,(ix-13)
+2952  11DA  DD 66 F4    	ld	h,(ix-12)
+2953  11DD  11 1C 00    	ld	de,0x001c
+2954  11E0  19          	add	hl, de
+2955  11E1  4E          	ld	c, (hl)
+2956  11E2  23          	inc	hl
+2957  11E3  46          	ld	b, (hl)
+2958  11E4  18 10       	jr	l_pf_write_00117
+2959  11E6              l_pf_write_00116:
+2960  11E6              ;fat/pff.c:1022: clst = get_fat(fs->curr_clust);
+2961  11E6  DD 6E F1    	ld	l,(ix-15)
+2962  11E9  DD 66 F2    	ld	h,(ix-14)
+2963  11EC  4E          	ld	c, (hl)
+2964  11ED  23          	inc	hl
+2965  11EE  46          	ld	b, (hl)
+2966  11EF  C5          	push	bc
+2967  11F0  CD 53 01    	call	_get_fat
+2968  11F3  F1          	pop	af
+2969  11F4  4D          	ld	c, l
+2970  11F5  44          	ld	b, h
+2971  11F6              l_pf_write_00117:
+2972  11F6              ;fat/pff.c:1024: if (clst <= 1) ABORT(FR_DISK_ERR);
+2973  11F6  3E 01       	ld	a,0x01
+2974  11F8  B9          	cp	a, c
+2975  11F9  3E 00       	ld	a,0x00
+2976  11FB  98          	sbc	a, b
+2977  11FC  38 0D       	jr	C,l_pf_write_00119
+2978  11FE  DD 6E ED    	ld	l,(ix-19)
+2979  1201  DD 66 EE    	ld	h,(ix-18)
+2980  1204  36 00       	ld	(hl),0x00
+2981  1206  2E 01       	ld	l,0x01
+2982  1208  C3 D5 13    	jp	l_pf_write_00139
+2983  120B              l_pf_write_00119:
+2984  120B              ;fat/pff.c:1025: fs->curr_clust = clst;				/* Update current cluster */
+2985  120B  DD 6E F1    	ld	l,(ix-15)
+2986  120E  DD 66 F2    	ld	h,(ix-14)
+2987  1211  71          	ld	(hl), c
+2988  1212  23          	inc	hl
+2989  1213  70          	ld	(hl), b
+2990  1214              l_pf_write_00121:
+2991  1214              ;fat/pff.c:1027: sect = clust2sect(fs->curr_clust);		/* Get current sector */
+2992  1214  DD 6E F1    	ld	l,(ix-15)
+2993  1217  DD 66 F2    	ld	h,(ix-14)
+2994  121A  4E          	ld	c, (hl)
+2995  121B  23          	inc	hl
+2996  121C  46          	ld	b, (hl)
+2997  121D  C5          	push	bc
+2998  121E  CD 17 02    	call	_clust2sect
+2999  1221  F1          	pop	af
+3000  1222  DD 75 F8    	ld	(ix-8),l
+3001  1225  DD 74 F9    	ld	(ix-7),h
+3002  1228  DD 73 FA    	ld	(ix-6),e
+3003  122B  DD 72 FB    	ld	(ix-5),d
+3004  122E              ;fat/pff.c:1028: if (!sect) ABORT(FR_DISK_ERR);
+3005  122E  7A          	ld	a, d
+3006  122F  B3          	or	a, e
+3007  1230  B4          	or	a, h
+3008  1231  B5          	or	a, l
+3009  1232  20 0D       	jr	NZ,l_pf_write_00123
+3010  1234  DD 6E ED    	ld	l,(ix-19)
+3011  1237  DD 66 EE    	ld	h,(ix-18)
+3012  123A  36 00       	ld	(hl),0x00
+3013  123C  2E 01       	ld	l,0x01
+3014  123E  C3 D5 13    	jp	l_pf_write_00139
+3015  1241              l_pf_write_00123:
+3016  1241              ;fat/pff.c:1029: fs->dsect = sect + cs;
+3017  1241  DD 7E E9    	ld	a,(ix-23)
+3018  1244  C6 20       	add	a,0x20
+3019  1246  DD 77 FC    	ld	(ix-4),a
+3020  1249  DD 7E EA    	ld	a,(ix-22)
+3021  124C  CE 00       	adc	a,0x00
+3022  124E  DD 77 FD    	ld	(ix-3),a
+3023  1251  DD 4E F7    	ld	c,(ix-9)
+3024  1254  06 00       	ld	b,0x00
+3025  1256  1E 00       	ld	e,0x00
+3026  1258  16 00       	ld	d,0x00
+3027  125A  DD 7E F8    	ld	a,(ix-8)
+3028  125D  81          	add	a, c
+3029  125E  4F          	ld	c, a
+3030  125F  DD 7E F9    	ld	a,(ix-7)
+3031  1262  88          	adc	a, b
+3032  1263  47          	ld	b, a
+3033  1264  DD 7E FA    	ld	a,(ix-6)
+3034  1267  8B          	adc	a, e
+3035  1268  5F          	ld	e, a
+3036  1269  DD 7E FB    	ld	a,(ix-5)
+3037  126C  8A          	adc	a, d
+3038  126D  57          	ld	d, a
+3039  126E  DD 6E FC    	ld	l,(ix-4)
+3040  1271  DD 66 FD    	ld	h,(ix-3)
+3041  1274  71          	ld	(hl), c
+3042  1275  23          	inc	hl
+3043  1276  70          	ld	(hl), b
+3044  1277  23          	inc	hl
+3045  1278  73          	ld	(hl), e
+3046  1279  23          	inc	hl
+3047  127A  72          	ld	(hl), d
+3048  127B              ;fat/pff.c:1030: if (disk_writep(0, fs->dsect)) ABORT(FR_DISK_ERR);	/* Initiate a sector write operation */
+3049  127B  D5          	push	de
+3050  127C  C5          	push	bc
+3051  127D  21 00 00    	ld	hl,0x0000
+3052  1280  E5          	push	hl
+3053  1281  CD 00 00    	call	_disk_writep
+3054  1284  F1          	pop	af
+3055  1285  F1          	pop	af
+3056  1286  F1          	pop	af
+3057  1287  7D          	ld	a, l
+3058  1288  B7          	or	a, a
+3059  1289  28 0D       	jr	Z,l_pf_write_00125
+3060  128B  DD 6E ED    	ld	l,(ix-19)
+3061  128E  DD 66 EE    	ld	h,(ix-18)
+3062  1291  36 00       	ld	(hl),0x00
+3063  1293  2E 01       	ld	l,0x01
+3064  1295  C3 D5 13    	jp	l_pf_write_00139
+3065  1298              l_pf_write_00125:
+3066  1298              ;fat/pff.c:1031: fs->flag |= FA__WIP;
+3067  1298  DD 6E ED    	ld	l,(ix-19)
+3068  129B  DD 66 EE    	ld	h,(ix-18)
+3069  129E  7E          	ld	a, (hl)
+3070  129F  CB F7       	set	6, a
+3071  12A1  DD 6E ED    	ld	l,(ix-19)
+3072  12A4  DD 66 EE    	ld	h,(ix-18)
+3073  12A7  77          	ld	(hl), a
+3074  12A8              l_pf_write_00127:
+3075  12A8              ;fat/pff.c:1033: wcnt = 512 - (UINT)fs->fptr % 512;			/* Number of bytes to write to the sector */
+3076  12A8  DD 6E EF    	ld	l,(ix-17)
+3077  12AB  DD 66 F0    	ld	h,(ix-16)
+3078  12AE  4E          	ld	c, (hl)
+3079  12AF  23          	inc	hl
+3080  12B0  7E          	ld	a, (hl)
+3081  12B1  E6 01       	and	a,0x01
+3082  12B3  47          	ld	b, a
+3083  12B4  AF          	xor	a, a
+3084  12B5  91          	sub	a, c
+3085  12B6  4F          	ld	c, a
+3086  12B7  3E 02       	ld	a,0x02
+3087  12B9  98          	sbc	a, b
+3088  12BA  5F          	ld	e, a
+3089  12BB              ;fat/pff.c:1034: if (wcnt > btw) wcnt = btw;
+3090  12BB  DD 7E 06    	ld	a,(ix+6)
+3091  12BE  91          	sub	a, c
+3092  12BF  DD 7E 07    	ld	a,(ix+7)
+3093  12C2  9B          	sbc	a, e
+3094  12C3  30 06       	jr	NC,l_pf_write_00129
+3095  12C5  DD 4E 06    	ld	c,(ix+6)
+3096  12C8  DD 5E 07    	ld	e,(ix+7)
+3097  12CB              l_pf_write_00129:
+3098  12CB              ;fat/pff.c:1035: if (disk_writep(p, wcnt)) ABORT(FR_DISK_ERR);	/* Send data to the sector */
+3099  12CB  DD 71 E5    	ld	(ix-27),c
+3100  12CE  DD 73 E6    	ld	(ix-26),e
+3101  12D1  DD 36 E7 00 	ld	(ix-25),0x00
+3102  12D5  DD 36 E8 00 	ld	(ix-24),0x00
+3103  12D9  C5          	push	bc
+3104  12DA  D5          	push	de
+3105  12DB  DD 6E E7    	ld	l,(ix-25)
+3106  12DE  DD 66 E8    	ld	h,(ix-24)
+3107  12E1  E5          	push	hl
+3108  12E2  DD 6E E5    	ld	l,(ix-27)
+3109  12E5  DD 66 E6    	ld	h,(ix-26)
+3110  12E8  E5          	push	hl
+3111  12E9  DD 6E FE    	ld	l,(ix-2)
+3112  12EC  DD 66 FF    	ld	h,(ix-1)
+3113  12EF  E5          	push	hl
+3114  12F0  CD 00 00    	call	_disk_writep
+3115  12F3  F1          	pop	af
+3116  12F4  F1          	pop	af
+3117  12F5  F1          	pop	af
+3118  12F6  7D          	ld	a, l
+3119  12F7  D1          	pop	de
+3120  12F8  C1          	pop	bc
+3121  12F9  B7          	or	a, a
+3122  12FA  28 0D       	jr	Z,l_pf_write_00131
+3123  12FC  DD 6E ED    	ld	l,(ix-19)
+3124  12FF  DD 66 EE    	ld	h,(ix-18)
+3125  1302  36 00       	ld	(hl),0x00
+3126  1304  2E 01       	ld	l,0x01
+3127  1306  C3 D5 13    	jp	l_pf_write_00139
+3128  1309              l_pf_write_00131:
+3129  1309              ;fat/pff.c:1036: fs->fptr += wcnt; p += wcnt;				/* Update pointers and counters */
+3130  1309  DD 6E EF    	ld	l,(ix-17)
+3131  130C  DD 66 F0    	ld	h,(ix-16)
+3132  130F  46          	ld	b, (hl)
+3133  1310  23          	inc	hl
+3134  1311  56          	ld	d, (hl)
+3135  1312  23          	inc	hl
+3136  1313  23          	inc	hl
+3137  1314  7E          	ld	a, (hl)
+3138  1315  2B          	dec	hl
+3139  1316  6E          	ld	l, (hl)
+3140  1317  67          	ld	h, a
+3141  1318  78          	ld	a, b
+3142  1319  DD 86 E5    	add	a,(ix-27)
+3143  131C  DD 77 FA    	ld	(ix-6),a
+3144  131F  7A          	ld	a, d
+3145  1320  DD 8E E6    	adc	a,(ix-26)
+3146  1323  DD 77 FB    	ld	(ix-5),a
+3147  1326  7D          	ld	a, l
+3148  1327  DD 8E E7    	adc	a,(ix-25)
+3149  132A  DD 77 FC    	ld	(ix-4),a
+3150  132D  7C          	ld	a, h
+3151  132E  DD 8E E8    	adc	a,(ix-24)
+3152  1331  DD 77 FD    	ld	(ix-3),a
+3153  1334  D5          	push	de
+3154  1335  C5          	push	bc
+3155  1336  DD 5E EF    	ld	e,(ix-17)
+3156  1339  DD 56 F0    	ld	d,(ix-16)
+3157  133C  21 19 00    	ld	hl,0x0019
+3158  133F  39          	add	hl, sp
+3159  1340  01 04 00    	ld	bc,0x0004
+3160  1343  ED B0       	ldir
+3161  1345  C1          	pop	bc
+3162  1346  D1          	pop	de
+3163  1347  DD 7E FE    	ld	a,(ix-2)
+3164  134A  81          	add	a, c
+3165  134B  DD 77 FE    	ld	(ix-2),a
+3166  134E  DD 7E FF    	ld	a,(ix-1)
+3167  1351  8B          	adc	a, e
+3168  1352  DD 77 FF    	ld	(ix-1),a
+3169  1355              ;fat/pff.c:1037: btw -= wcnt; *bw += wcnt;
+3170  1355  DD 7E 06    	ld	a,(ix+6)
+3171  1358  91          	sub	a, c
+3172  1359  DD 77 06    	ld	(ix+6),a
+3173  135C  DD 7E 07    	ld	a,(ix+7)
+3174  135F  9B          	sbc	a, e
+3175  1360  DD 77 07    	ld	(ix+7),a
+3176  1363  DD 6E EB    	ld	l,(ix-21)
+3177  1366  DD 66 EC    	ld	h,(ix-20)
+3178  1369  46          	ld	b, (hl)
+3179  136A  23          	inc	hl
+3180  136B  56          	ld	d, (hl)
+3181  136C  78          	ld	a, b
+3182  136D  81          	add	a, c
+3183  136E  DD 77 F8    	ld	(ix-8),a
+3184  1371  7A          	ld	a, d
+3185  1372  8B          	adc	a, e
+3186  1373  DD 77 F9    	ld	(ix-7),a
+3187  1376  DD 6E EB    	ld	l,(ix-21)
+3188  1379  DD 66 EC    	ld	h,(ix-20)
+3189  137C  DD 7E F8    	ld	a,(ix-8)
+3190  137F  77          	ld	(hl), a
+3191  1380  23          	inc	hl
+3192  1381  DD 7E F9    	ld	a,(ix-7)
+3193  1384  77          	ld	(hl), a
+3194  1385              ;fat/pff.c:1038: if ((UINT)fs->fptr % 512 == 0) {
+3195  1385  DD 7E FA    	ld	a,(ix-6)
+3196  1388  DD 77 FC    	ld	(ix-4),a
+3197  138B  DD 7E FB    	ld	a,(ix-5)
+3198  138E  DD 77 FD    	ld	(ix-3),a
+3199  1391  DD 7E FC    	ld	a,(ix-4)
+3200  1394  B7          	or	a, a
+3201  1395  C2 82 11    	jp	NZ,l_pf_write_00136
+3202  1398  DD CB FD 46 	bit	0,(ix-3)
+3203  139C  C2 82 11    	jp	NZ,l_pf_write_00136
+3204  139F              ;fat/pff.c:1039: if (disk_writep(0, 0)) ABORT(FR_DISK_ERR);	/* Finalize the currtent secter write operation */
+3205  139F  21 00 00    	ld	hl,0x0000
+3206  13A2  E5          	push	hl
+3207  13A3  21 00 00    	ld	hl,0x0000
+3208  13A6  E5          	push	hl
+3209  13A7  2E 00       	ld	l,0x00
+3210  13A9  E5          	push	hl
+3211  13AA  CD 00 00    	call	_disk_writep
+3212  13AD  F1          	pop	af
+3213  13AE  F1          	pop	af
+3214  13AF  F1          	pop	af
+3215  13B0  7D          	ld	a, l
+3216  13B1  B7          	or	a, a
+3217  13B2  28 0C       	jr	Z,l_pf_write_00133
+3218  13B4  DD 6E ED    	ld	l,(ix-19)
+3219  13B7  DD 66 EE    	ld	h,(ix-18)
+3220  13BA  36 00       	ld	(hl),0x00
+3221  13BC  2E 01       	ld	l,0x01
+3222  13BE  18 15       	jr	l_pf_write_00139
+3223  13C0              l_pf_write_00133:
+3224  13C0              ;fat/pff.c:1040: fs->flag &= ~FA__WIP;
+3225  13C0  DD 6E ED    	ld	l,(ix-19)
+3226  13C3  DD 66 EE    	ld	h,(ix-18)
+3227  13C6  7E          	ld	a, (hl)
+3228  13C7  CB B7       	res	6, a
+3229  13C9  DD 6E ED    	ld	l,(ix-19)
+3230  13CC  DD 66 EE    	ld	h,(ix-18)
+3231  13CF  77          	ld	(hl), a
+3232  13D0  C3 82 11    	jp	l_pf_write_00136
+3233  13D3              l_pf_write_00138:
+3234  13D3              ;fat/pff.c:1044: return FR_OK;
+3235  13D3  2E 00       	ld	l,0x00
+3236  13D5              l_pf_write_00139:
+3237  13D5              ;fat/pff.c:1045: }
+3238  13D5  DD F9       	ld	sp, ix
+3239  13D7  DD E1       	pop	ix
+3240  13D9  C9          	ret
+3241  13DA              	SECTION IGNORE
+3242  0000              
