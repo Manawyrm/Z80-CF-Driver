@@ -63,8 +63,6 @@
 #define CF_FEATURE_DISABLE_READ_LOOKAHEAD 	0x55
 #define CF_FEATURE_DISABLE_WRITE_CACHING	0x82
 
-void delayCycles(uint32_t sleep);
-
 extern uint8_t cf_sector[];
 
 void cf_init();

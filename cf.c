@@ -4,12 +4,6 @@
 
 uint8_t cf_sector[512];
 
-void delayCycles(uint32_t sleep)
-{
-	uint32_t a;
-	for (a = 0; a < sleep; a++) {}
-}
-
 void cf_init()
 {
 	uint8_t state;
